@@ -1,0 +1,9 @@
+<!--components/flip-card/index.wxml-->
+<view class="flip-card {{status}}" style="width: {{width}};height: {{height}};" bind:animationstart="onAnimationStart" bind:animationend="onAnimationEnd" bind:tap="handleFlipByClick">
+  <view class="card-face card-front" hidden="{{status === 'init'}}">
+    <slot name="front"></slot>
+  </view>
+  <view class="card-face card-back">
+    <slot name="back"></slot>
+  </view>
+</view>

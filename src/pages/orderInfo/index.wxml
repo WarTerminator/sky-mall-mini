@@ -1,0 +1,82 @@
+<navigation-bar title="订单详情" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list" show-scrollbar="{{false}}">
+  <view class="trans">
+    <view class="trans-item {{item.active ? 'active' : ''}}" wx:for="{{trans}}" wx:key="index">
+      <image class="trans-icon" src="{{IMG_PRE}}order-{{index}}.png" mode="widthFix" />
+      <view class="trans-status">{{item.status}}</view>
+      <view class="trans-date">{{item.date}}</view>
+    </view>
+  </view>
+  <view class="card">
+    <view class="card-number">
+      <view class="card-number-order">订单编号  {{orderId}}</view>
+      <view class="card-number-date">{{orderInfo.createTime}}</view>
+    </view>
+    <view class="card-info">
+      <view class="card-info-left">
+        <image src="{{orderInfo.orderItemDtos[0].pic}}" mode="widthFix" />
+      </view>
+      <view class="card-info-right">
+        <view class="card-info-title">{{orderInfo.orderItemDtos[0].prodName}}</view>
+        <view class="card-info-sku">规格  {{orderInfo.orderItemDtos[0].skuName || '默认'}}</view>
+        <view class="card-info-amount">数量 x{{orderInfo.orderItemDtos[0].prodCount}}</view>
+        <view class="card-info-price">{{orderInfo.orderItemDtos[0].price}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="info">
+    <view class="info-form">
+      <view class="info-form-item">
+        <view class="item-label">下单日期</view>
+        <view class="item-content">{{orderInfo.createTime}}</view>
+      </view>
+      <view class="info-form-item">
+        <view class="item-label">备注信息</view>
+        <view class="item-content">{{orderInfo.remarks || ''}}</view>
+      </view>
+      <view class="info-form-item">
+        <view class="item-label address">收货信息</view>
+        <view class="item-content">
+          <view>{{orderInfo.userAddrDto.receiver}}     {{orderInfo.userAddrDto.mobile}}</view>
+          {{orderInfo.userAddrDto.province}}  {{orderInfo.userAddrDto.city}}  {{orderInfo.userAddrDto.area}}  {{orderInfo.userAddrDto.addr}}
+        </view>
+      </view>
+      <view class="info-form-item">
+        <view class="item-label">支付方式</view>
+        <view class="item-content">微信</view>
+      </view>
+    </view>
+    <view class="pay-total">
+      <view class="pay-total-title">合计</view>
+      <view class="pay-total-count">
+        <view class="pay-total-label">
+          <text class="pay-total-num">{{orderInfo.totalNum}}</text>件商品
+        </view>
+        <view class="pay-total-num">{{orderInfo.total}}</view>
+      </view>
+      <view class="pay-total-fare">
+        <text class="pay-total-label">运费</text>
+        <text class="pay-total-num">{{orderInfo.transfee}}</text>
+      </view>
+      <view class="pay-total-discount">
+        <text class="pay-total-label">优惠</text>
+        <text class="pay-total-num">{{orderInfo.reduceAmount ? ('-' + orderInfo.reduceAmount): 0}}</text>
+      </view>
+      <view class="pay-total-all">
+        <text class="pay-total-all-title">共计金额</text>
+        <text class="pay-total-num">{{orderInfo.actualTotal}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="scroll-bottom"></view>
+</scroll-view>
+<view wx:if="{{orderInfo.status == 3 || orderInfo.status == 1}}" class="card-state">
+  <view class="card-state-order">
+    <!-- <view class="card-state-delivered">已收货</view> -->
+    <!-- <view class="card-state-service">申请售后</view>
+    <view class="card-state-logistics">查看物流</view> -->
+    <view wx:if="{{orderInfo.status===3}}" class="card-state-delivered" catchtap="handleGot">确认收货</view>
+    <view wx:if="{{orderInfo.status===1}}" class="card-state-apply" catchtap="handlePay">支付</view>
+    <!-- <view class="card-state-apply">申请发货</view> -->
+  </view>
+</view>

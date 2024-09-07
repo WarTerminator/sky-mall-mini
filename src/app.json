@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/product/index",
+    "pages/group/index",
+    "pages/design/index",
+    "pages/message/index",
+    "pages/shopCar/index",
+    "pages/pay/index",
+    "pages/blind-box-feeds/index",
+    "pages/blind-box/index",
+    "pages/my/index",
+    "pages/userInfo/index",
+    "pages/addressAdd/index",
+    "pages/address/index",
+    "pages/login/index",
+    "pages/orderList/index",
+    "pages/orderInfo/index",
+    "pages/payResult/index",
+    "pages/storage-locker/index",
+    "pages/submit-dispatch/index",
+    "pages/debug/index",
+    "pages/customized/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#9B9DB1",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/group/index",
+        "text": "创意"
+      },
+      {
+        "pagePath": "pages/customized/index",
+        "text": "定制"
+      },
+      {
+        "pagePath": "pages/message/index",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "renderer": "skyline",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

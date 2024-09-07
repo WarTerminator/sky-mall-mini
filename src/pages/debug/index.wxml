@@ -1,0 +1,5 @@
+<navigation-bar title="调试" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<view class="scrollarea">
+  <view class="cache" bindtap="handleClearNetCaches">清除网络缓存</view>
+  <view class="cache" bindtap="handleClearLocalCaches">清除本地缓存</view>
+</view>

@@ -1,0 +1,35 @@
+<navigation-bar title="支付结果" back="{{false}}" color="#ffffff" background="#21B962"></navigation-bar>
+<view class="content">
+  <view class="header">
+    <text class="icon success"></text>
+    <view class="info">
+      <text class="info-status">支付成功</text>
+      <text class="info-extra">已获得x点能量</text>
+    </view>
+  </view>
+  <view class="btn">
+    <view class="btn-home" bindtap="handleToHome">返回首页</view>
+    <view class="btn-order" bindtap="handleToOrder">查看订单</view>
+  </view>
+</view>
+<scroll-view class="scrollarea" scroll-y type="custom" bindscrolltolower="handleScrollEnd">
+  <sticky-header>
+    <view class="list-title">
+      <view class="dot-right rotate"><text class="dot-middle"></text></view>
+      <view class="list-title-text">更多好物</view>
+      <view class="dot-right"><text class="dot-middle"></text></view>
+    </view>
+  </sticky-header>
+  <grid-view
+    padding="{{[6, 6, 6, 6]}}"
+    cross-axis-gap="6"
+    main-axis-gap="6"
+    cross-axis-count="2"
+    type="masonry"
+  >
+    <block wx:for="{{goods}}" wx:key="index">
+      <goods-card item="{{item}}"></goods-card>
+    </block>
+  </grid-view>
+  <view class="{{!goods.length && !init ? 'empty' : 'scroll-bottom'}}"></view>
+</scroll-view>

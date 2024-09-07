@@ -1,0 +1,81 @@
+<navigation-bar title="收银台" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view
+  class="scroll-area"
+  scroll-y
+  show-scrollbar="{{false}}"
+  type="custom"
+>
+  <view class="pay-title">官方授权，正品保证，放心购买</view>
+
+  <view class="pay-address" bindtap="handleAddress">
+    <block wx:if="{{addressSelected.addrId}}">
+      <view class="pay-address-top">
+        <text wx:if="{{addressSelected.commonAddr == 1}}" class="pay-address-default">默认</text>
+        <text class="pay-address-name">{{addressSelected.receiver}}</text>
+        <text class="pay-address-phone">{{addressSelected.mobile}}</text>
+      </view>
+      <view class="pay-address-info">
+        {{addressSelected.province}}{{addressSelected.city}}{{addressSelected.area}}{{addressSelected.addr}}
+      </view>
+      <view class="pay-address-after"></view>
+    </block>
+    <view wx:else class="pay-address-empty">添加地址</view>
+    <view class="pay-address-line"></view>
+  </view>
+
+  <view class="pay-goods">
+    <view class="pay-goods-img-box">
+      <image mode="widthFix" src="{{orderProduct.$selectSkuItem.pic || orderProduct.pic}}" class="pay-goods-img" />
+    </view>
+    <view class="pay-goods-info">
+      <text class="pay-goods-title">{{orderProduct.prodName}}</text>
+      <text class="pay-goods-sku">规格  {{orderProduct.$selectSkuItem.skuName}}</text>
+      <text class="pay-goods-count">数量  {{orderProduct.$selectItemCount}}</text>
+    </view>
+    <view class="pay-goods-price">{{orderProduct.$selectSkuItem.price || orderProduct.price}}</view>
+  </view>
+
+  <view class="pay-fare">
+    <text class="pay-label-text">运费</text>
+    <text class="pay-goods-price">{{orderDetail.totalTransfee}}</text>
+  </view>
+  <view class="pay-power" wx:if="{{orderProduct.prodType == 3 && userInfo.score && shopScoreSwitch}}">
+    <view class="pay-power-text">
+      能量抵扣（能量  <text class="font-weight">{{orderDetail.totalUsableScore}}</text>   可抵扣<text class="font-weight">{{orderDetail.totalScoreAmount || 0}}</text>元）
+    </view>
+    <text class="custom-radio{{ enableEnergyDeduction ? '-active':''}}" bindtap="toggleEnergyDeduction"></text>
+  </view>
+  <!-- <view class="pay-way">
+    <text class="pay-label-text">微信支付</text>
+    <text class="custom-radio-active"></text>
+  </view> -->
+  <view class="pay-remark">
+    <text class="pay-label-text">备注</text>
+    <input class="pay-input" type='text' placeholder="若有特殊要求，请备注" value="{{remark}}" bindblur="handleRemark" />
+  </view>
+  <view class="pay-total">
+    <view class="pay-total-title">合计</view>
+    <view class="pay-total-count">
+      <view class="pay-total-label">
+        <text class="pay-total-num">{{orderDetail.totalCount}}</text>件商品
+      </view>
+      <view class="pay-total-num">{{orderDetail.total}}</view>
+    </view>
+    <view class="pay-total-fare">
+      <text class="pay-total-label">运费</text>
+      <text class="pay-total-num">{{orderDetail.totalTransfee}}</text>
+    </view>
+    <view class="pay-total-discount">
+      <text class="pay-total-label">抵扣</text>
+      <text class="pay-total-num">{{orderDetail.orderReduce ? ('-' + orderDetail.orderReduce): 0}}</text>
+    </view>
+    <view class="pay-total-all">
+      <text class="pay-total-all-title">共计金额</text>
+      <text class="pay-total-num">{{orderDetail.actualTotal}}</text>
+    </view>
+  </view>
+  <view class="pay-btn" bindtap="handleSubmit">
+    立即付款
+  </view>
+  <view class="scroll-bottom"></view>
+</scroll-view>

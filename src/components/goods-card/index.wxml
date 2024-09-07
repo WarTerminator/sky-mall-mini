@@ -1,0 +1,13 @@
+<view class="goods" bindtap="handleDetail">
+  <image mode="widthFix" class="goods-icon" fade-in src="{{item.pic}}" />
+  <view class="goods-title">
+    <text>{{item.prodName}}</text>
+  </view>
+  <view class="goods-info">
+    <view class="goods-info-price">{{item.price}}</view>
+    <view wx:if="{{item.shopName}}" class="goods-info-shop">
+      <image mode="widthFix" class="shop-icon" fade-in src="{{IMG_HOST}}/{{item.shopLogo}}" />
+      {{item.shopName}}
+    </view>
+  </view>
+</view>

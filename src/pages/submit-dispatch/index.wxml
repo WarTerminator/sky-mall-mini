@@ -1,0 +1,47 @@
+<!--确认发货-->
+<navigation-bar title="确认发货" back="{{true}}" background="#FFF" />
+<view class="submit-dispatch">
+  <view class="order-wrap">
+    <view class="order-info">
+      <view class="img-wrap">
+        <image src="https://img.war6sky.com/2024/08/f6289e988d624b749fb8a5d47f555eac.png" mode="aspectFit"></image>
+      </view>
+      <view class="item-wrap">
+        <view class="item-name">一诺、归期、Q丽等卡片</view>
+        <view class="item-count">
+          共6张
+        </view>
+      </view>
+    </view>
+    <view class="discount-item">
+      <view class="label">优惠券</view>
+      <view class="value">暂无可用</view>
+    </view>
+    <view class="discount-item">
+      <view class="label">不凡能量</view>
+      <view class="value">暂无可用</view>
+    </view>
+    <view class="amount-wrap">
+      <view class="label">共计：</view>
+      <view class="value">
+        <text class="unit">￥</text>
+        <text class="amount">10</text>
+      </view>
+    </view>
+  </view>
+  <view class="address-wrap" bindtap="handleSelectAddress">
+    <block wx:if="{{selectedAddress.addrId}}">
+      <view class="address-top-wrap">
+        <text wx:if="{{selectedAddress.commonAddr == 1}}" class="default-tag">默认</text>
+        <text class="receiver-name">{{selectedAddress.receiver}}</text>
+        <text class="receiver-phone">{{selectedAddress.mobile}}</text>
+      </view>
+      <view class="address-info">
+        {{selectedAddress.province}}{{selectedAddress.city}}{{selectedAddress.area}}{{selectedAddress.addr}}
+      </view>
+      <view class="arrow-icon"></view>
+    </block>
+    <view wx:else class="address-empty">添加地址</view>
+    <view class="decorate-line"></view>
+  </view>
+</view>

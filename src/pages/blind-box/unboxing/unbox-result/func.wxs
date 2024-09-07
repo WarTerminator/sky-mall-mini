@@ -1,0 +1,17 @@
+module.exports = {
+  getAllInPosition: function (cards) {
+    return cards.every(function (item) {
+      return item.inPosition;
+    });
+  },
+  getAllFlipped: function (cards) {
+    return cards.every(function (item) {
+      return item.flipped;
+    });
+  },
+  getSomeOverview: function (cards) {
+    return cards.some(function (item) {
+      return item.overview;
+    });
+  },
+};

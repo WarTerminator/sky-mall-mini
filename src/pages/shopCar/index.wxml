@@ -1,0 +1,4 @@
+<navigation-bar title="购物车" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<view class="page-car">
+  <text>购物车</text>
+</view>

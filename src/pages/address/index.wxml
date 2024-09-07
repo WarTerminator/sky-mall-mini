@@ -1,0 +1,25 @@
+<navigation-bar title="地址管理" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="header">
+    <text class="header-title">常用地址</text>
+    <text wx:if="{{addressList.length}}" class="header-btn" bindtap="handleToAdd">添加地址</text>
+  </view>
+  <view wx:for="{{addressList}}" class="card" wx:key="addrId" data-item="{{item}}" bindtap="handleSelect">
+    <view class="card-top">
+      <text wx:if="{{item.commonAddr == 1}}" class="card-default">默认</text>
+      <text class="card-name">{{item.receiver}}</text>
+      <text class="card-phone">{{item.mobile}}</text>
+    </view>
+    <view class="card-info">
+      {{item.province}}{{item.city}}{{item.area}}{{item.addr}}
+    </view>
+    <view class="card-btn">
+      <text class="card-btn-del" data-item="{{item}}" catchtap="handleDel">删除</text>
+      <view class="card-btn-edit" data-item="{{item}}" catchtap="handleEdit">编辑</view>
+    </view>
+    <view wx:if="{{from == 'pay'}}" class="card-radio {{selectedAddrId == item.addrId ? 'active' : '' }}"></view>
+    <view wx:if="{{index == 0}}" class="card-line"></view>
+  </view>
+  <view class="scroll-bottom"></view>
+  <view wx:if="{{!addressList.length}}" class="card-empty" bindtap="handleToAdd">添加地址</view>
+</scroll-view>

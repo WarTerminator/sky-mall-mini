@@ -1,0 +1,11 @@
+<!--POP集合-->
+<page-container show="{{!!showPopKey}}" position="{{popConfig.position}}" custom-style="height: {{popConfig.height}}; background: transparent;" bind:afterleave="handleClose">
+  <view class="pop-adapter">
+    <confirm-order wx:if="{{showPopKey === 'confirmOrder'}}" count="{{extraData.count}}" blindBox="{{blindBox}}" bind:submit="onConfirmOrderSubmit" bind:close="handleClose"></confirm-order>
+    <confirm-pay wx:if="{{showPopKey === 'confirmPay'}}" count="{{extraData.count}}" totalPrice="{{extraData.totalPrice}}" bind:success="onPaySuccess" bind:close="handleClose"></confirm-pay>
+    <unboxing wx:if="{{showPopKey === 'unboxing'}}" count="{{extraData.count}}" blindBox="{{blindBox}}" bind:finished="handleClose"></unboxing>
+    <detail-pop wx:if="{{showPopKey === 'detailPop'}}" bind:close="handleClose"></detail-pop>
+    <probability-info wx:if="{{showPopKey === 'probabilityInfo'}}" bind:close="handleClose" blindBox="{{blindBox}}"></probability-info>
+    <unbox-record wx:if="{{showPopKey === 'unboxRecord'}}"></unbox-record>
+  </view>
+</page-container>

@@ -1,0 +1,8 @@
+<!--拆包-->
+<view class="unboxing-pop">
+  <block wx:if="{{showResult}}">
+    <unbox-large-result wx:if="{{cards.length > 6}}" cards="{{cards}}" bind:finished="onFlipAllFinished"></unbox-large-result>
+    <unbox-result wx:else cards="{{cards}}" bind:finished="onFlipAllFinished"></unbox-result>
+  </block>
+  <unbox-canvas bind:success="onDrawSuccess" bind:unboxed="onCanvasUnboxed" bind:error="onFlipAllFinished" count="{{count}}" blindBox="{{blindBox}}"></unbox-canvas>
+</view>

@@ -1,0 +1,4 @@
+<!--pages/blind-box/unboxing/unbox-canvas/index.wxml-->
+<view wx:if="{{show}}" class="unbox-canvas" bind:tap="handleActiveUnbox">
+  <canvas type="2d" id="blind-box-canvas" style="width: {{width}}px; height: {{height}}px;"></canvas>
+</view>

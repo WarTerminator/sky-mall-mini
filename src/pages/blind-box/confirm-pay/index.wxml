@@ -1,0 +1,20 @@
+<!--确认支付-->
+<view class="confirm-pay">
+  <view class="title-wrap">
+    <text>选择支付方式</text>
+    <view class="close-btn" bind:tap="handleClose"></view>
+  </view>
+  <view class="pay-type-list">
+    <view class="pay-type-item">
+      <view class="type-info">
+        <image src="https://img.war6sky.com/resources/images/mall-wechat-1.png"></image>
+        <text>微信支付 {{totalPrice}}元</text>
+      </view>
+      <icon type="success" size="23"></icon>
+    </view>
+  </view>
+  <view class="btn-wrap">
+    <view class="placeholder"></view>
+    <view class="action-btn" hover-class="active" bind:tap="handleSubmit">确认</view>
+  </view>
+</view>

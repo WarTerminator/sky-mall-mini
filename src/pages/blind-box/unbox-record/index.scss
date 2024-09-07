@@ -1,0 +1,129 @@
+/* pages/blind-box/unbox-record/index.wxss */
+@import '../../../variables.scss';
+
+.unbox-record {
+  @include flexColumn;
+  width: 100%;
+  height: 100%;
+  background: #34404A;
+  border-radius: 60rpx 60rpx 0 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 408rpx;
+    background-image: linear-gradient(-11deg, #34404A 74%, #3E81DB 100%);
+    border-radius: 60rpx 60rpx 0 0;
+  }
+
+  .tab-wrap {
+    flex: 0 0 auto;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    height: 126rpx;
+    @include flexRow;
+
+    .tab-item {
+      @include flexRowCenter;
+      flex: 1;
+      height: 100%;
+      font-size: 30rpx;
+      line-height: 40rpx;
+      color: #FFFFFF;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 20rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 10rpx;
+        background: #00ADEF;
+        border-radius: 5rpx;
+        transition: width 0.2s;
+        width: 0;
+      }
+
+      &.selected {
+        font-weight: bold;
+        font-size: 34rpx;
+        &::after {
+          width: 64rpx;
+        }
+      }
+    }
+  }
+
+  .tip-wrap {
+    flex: 0 0 auto;
+    position: relative;
+    font-size: 20rpx;
+    line-height: 30rpx;
+    color: #AFAFAF;
+    margin-left: 50rpx;
+    align-self: start;
+    margin-bottom: 20rpx;
+  }
+
+  .scroll-wrap {
+    flex: 1;
+    width: 100%;
+    height: 0;
+  }
+
+  .record-list {
+    width: 684rpx;
+    margin: 0 auto;
+    padding-bottom: 50rpx;
+  }
+
+  .record-item {
+    box-sizing: border-box;
+    background: #26313A;
+    box-shadow: 0 2rpx 18rpx -10rpx rgba(0,0,0,0.50);
+    border-radius: 32rpx;
+    width: 684rpx;
+    height: 166rpx;
+    margin-bottom: 12rpx;
+    @include flexRow;
+    padding: 0 24rpx 0 37rpx;
+    position: relative;
+
+    .item-img {
+      width: 80rpx;
+      height: 110rpx;
+      border-radius: 6rpx;
+      margin-right: 25rpx;
+    }
+
+    .item-title {
+      flex: 1;
+      margin-right: 100rpx;
+      font-size: 30rpx;
+      line-height: 42rpx;
+      color: #FFFFFF;
+    }
+
+    .user-avatar {
+      width: 60rpx;
+      height: 60rpx;
+      border-radius: 100%;
+    }
+
+    .record-time {
+      position: absolute;
+      right: 24rpx;
+      bottom: 8rpx;
+      font-size: 22rpx;
+      line-height: 30rpx;
+      color: #AAAAAA;
+    }
+  }
+}

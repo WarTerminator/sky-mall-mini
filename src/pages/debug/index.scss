@@ -1,0 +1,13 @@
+
+@import '../../variables.scss';
+.scrollarea {
+  padding-top: 100rpx;
+}
+.cache {
+  margin-left: 100rpx;
+  margin-bottom: 40rpx;
+  width: 550rpx;
+  height: 78rpx;
+  border: 1px solid #ccc;
+  @include flexRowCenter;
+}

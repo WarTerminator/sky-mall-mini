@@ -1,0 +1,67 @@
+@import '../variables.scss';
+.tab-bar {
+  padding-top: 24rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  background: white;
+  z-index: 999;
+  padding-bottom: env(safe-area-inset-bottom);
+  pointer-events: auto;
+}
+
+.tab-bar-border {
+  background-color: rgba(0, 0, 0, 0.33);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1rpx;
+  transform: scaleY(0.5);
+}
+
+.tab-bar-item {
+  flex: 1;
+  @include flexColumnCenter;
+  &-text {
+    @include flexColumnCenter;
+    height: 56rpx;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 28rpx;
+  }
+  image {
+    height: 32rpx;
+  }
+  &.active {
+    .tab-bar-item-text {
+      color: rgba(0, 0, 0, 1);
+      font-size: 30rpx;
+    }
+    image {
+      height: 34rpx;
+    }
+    &.middle {
+      image {
+        position: absolute;
+        top: -40rpx;
+        width: 192rpx;
+        height: 120rpx;
+      }
+    }
+  }
+  &.middle {
+    image {
+      position: absolute;
+      top: -40rpx;
+      width: 180rpx;
+      height: 113rpx;
+    }
+    .tab-bar-item-text {
+      display: none;
+    }
+  }
+}
+

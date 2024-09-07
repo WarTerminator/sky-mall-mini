@@ -1,0 +1,67 @@
+$IMG_PRE: 'https://img.war6sky.com/resources/images/mini/';
+
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@mixin flexRowStart {
+  @include flexRow;
+  justify-content: flex-start;
+}
+
+@mixin flexRowCenter {
+  @include flexRow;
+  justify-content: center;
+}
+
+@mixin flexRowBetween {
+  @include flexRow;
+  justify-content: space-between;
+}
+
+@mixin flexColumnStart {
+  @include flexColumn;
+  justify-content: flex-start;
+}
+
+@mixin flexColumnCenter {
+  @include flexColumn;
+  justify-content: center;
+}
+
+@mixin flexColumnBetween {
+  @include flexColumn;
+  justify-content: space-between;
+}
+
+@mixin bgImg($widthVal, $heightVal, $imageUrl) {
+  display: flex;
+  $width: $widthVal + rpx;
+  $height: $heightVal + rpx;
+
+  width: $width;
+  height: $height;
+  background: url($IMG_PRE + $imageUrl) no-repeat center;
+  background-size: contain;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin empty {
+  margin: 20rpx 99rpx 0;
+  @include bgImg(552, 257, 'empty.png');
+}

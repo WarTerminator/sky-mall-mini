@@ -1,0 +1,43 @@
+<!--暂存柜-->
+<navigation-bar title="暂存柜" back="{{true}}" background="#FFF" />
+<view class="storage-locker">
+  <view class="top-wrap">
+    <view>暂存期</view>
+    <view class="text">暂存30天后商家可强制发货</view>
+    <image class="arrow-icon" src="https://img.war6sky.com/2024/08/0b0c4b2d3a464e1a8911af349ae6fbb3.png"></image>
+  </view>
+  <scroll-view type="list" class="sort-wrap" scroll-x>
+    <view wx:for="{{['全部', '普卡', '特卡']}}" wx:key="*this" class="sort-item">
+      {{item}}
+    </view>
+  </scroll-view>
+  <view class="storage-summary">
+    <view>6个商品</view>
+    <view class="select-all" bind:tap="handleSelectAll">
+      <view class="circle {{selectedCount == cards.length ? 'active' : ''}}"></view>
+      <view>全选</view>
+    </view>
+  </view>
+  <scroll-view class="scroll-wrap" type="custom" scroll-y>
+    <view class="card-list">
+      <view wx:for="{{cards}}" wx:key="value" class="card-item {{item.selected ? 'selected' : ''}} {{mode}}" data-index="{{index}}" bind:tap="handleSelectItem">
+        <image class="card-img" src="{{item.value}}" mode="aspectFill"></image>
+        <view class="card-name">小美</view>
+        <view class="card-code">PL-SGR-012</view>
+        <image wx:if="{{item.selected}}" class="selected-icon" src="https://img.war6sky.com/2024/08/e3492d1f489843cb914a66a412a5d8d8.png"></image>
+        <view wx:else class="unselected-circle"></view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="bottom-wrap">
+    <view class="cart-icon">
+      <image src="https://img.war6sky.com/2024/08/f592ca0067ff48ef893c526b7efc6535.png" />
+      <view wx:if="{{!!selectedCount}}" class="selected-count">{{selectedCount}}</view>
+    </view>
+    <view class="action-btn {{!selectedCount ? 'disabled' : ''}}">立即发货</view>
+  </view>
+  <view class="switch-mode" bind:tap="handleSwitchMode">
+    <image wx:if="{{mode === 'small'}}" src="https://img.war6sky.com/2024/08/5a0658f64788496283b42636f16c51d3.png" />
+    <image wx:else src="https://img.war6sky.com/2024/08/62bf84d41a6d43a8a511de84f5319a01.png" />
+  </view>
+</view>

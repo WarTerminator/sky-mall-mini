@@ -1,0 +1,121 @@
+@import '../../variables.scss';
+page {
+  background: #21B962;
+}
+.content {
+  padding: 66rpx 0;
+  width: 100%;
+  background: #21B962;
+}
+.header {
+  width: 100%;
+  @include flexRowCenter;
+  .icon {
+    &.success {
+      @include bgImg(122,100,'success.png');
+    }
+  }
+  .info {
+    margin-left: 10rpx;
+    @include flexColumnCenter;
+    &-status {
+      font-size: 42rpx;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+    &-extra {
+      margin-top: 10rpx;
+      font-size: 22rpx;
+      color: #FFFFFF;
+    }
+  }
+}
+.btn {
+  padding-top: 46rpx;
+  width: 100%;
+  @include flexRowCenter;
+  &-home {
+    margin-right: 20rpx;
+    width: 187rpx;
+    height: 73rpx;
+    border-radius: 73rpx;
+    opacity: 0.8;
+    font-size: 30rpx;
+    font-weight: 500;
+    color: #fff;
+    border: 1rpx solid #FFFFFF;
+    @include flexRowCenter;
+  }
+  &-order {
+    width: 187rpx;
+    height: 73rpx;
+    border-radius: 73rpx;
+    font-size: 30rpx;
+    font-weight: 500;
+    color: #18AC57;
+    @include flexRowCenter;
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+.scrollarea {
+  height: 68vh;
+  background: #F6F8F9;
+  border-top-left-radius: 25rpx;
+  border-top-right-radius: 25rpx;
+  // &-before {
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 40rpx;
+  //   top: 20rpx;
+  //   left: 0;
+  //   z-index: -1;
+  //   background: #21B962;
+  // }
+}
+.list-title {
+  height: 118rpx;
+  @include flexRowCenter;
+  background: #fff;
+  &-text {
+    padding: 0 20rpx;
+    font-size: 34rpx;
+    font-weight: 500;
+    color: #060606;
+  }
+  .dot-right {
+    @include flexRowCenter;
+    &::before {
+      margin-right: 13rpx;
+      content: '';
+      width: 8rpx;
+      height: 8rpx;
+      border-radius: 8rpx;
+      background: #C2C2C2;
+    }
+    .dot-middle {
+      width: 7rpx;
+      height: 7rpx;
+      border-radius: 7rpx;
+      background: #C2C2C2;
+    }
+    &::after {
+      margin-left: 13rpx;
+      content: '';
+      width: 6rpx;
+      height: 6rpx;
+      border-radius: 6rpx;
+      background: #C2C2C2;
+    }
+    &.rotate {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.empty {
+  @include empty();
+}
+.scroll-bottom {
+  width: 552rpx;
+  height: 100rpx;
+}

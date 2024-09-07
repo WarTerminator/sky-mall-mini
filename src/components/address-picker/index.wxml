@@ -1,0 +1,34 @@
+<view class="{{extClass}}" bindtap="handleShowAddressPickerView">
+  <slot name="btn"></slot>
+</view>
+
+<view
+  class="dialog-mask"
+  style="z-index:11;visibility:{{addressPickerViewShow ? 'visible': 'hidden'}}"
+  bindtap="handleHiddenAddressPickerView"
+/>
+
+<!--城市三级联动-->
+<view class="picker-view" style="visibility:{{addressPickerViewShow ? 'visible':'hidden'}}">
+  <view class="picker-view-title">
+    <text catchtap="handleHiddenAddressPickerView">取消</text>
+    <text style="float: right" catchtap="handleEnsure">确定</text>
+  </view>
+  <picker-view class="picker-view-box" bindchange="onPickerViewChange" value="{{value}}">
+    <picker-view-column>
+      <view wx:for="{{PROVINCES}}" class="picker-item" wx:key="areaId">
+        {{item.areaName}}
+      </view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{cities}}" class="picker-item" wx:key="areaId">
+        {{item.areaName}}
+      </view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{areas}}" class="picker-item" wx:key="areaId">
+        {{item.areaName}}
+      </view>
+    </picker-view-column>
+  </picker-view>
+</view>

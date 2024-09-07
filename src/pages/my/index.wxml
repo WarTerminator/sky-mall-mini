@@ -1,0 +1,52 @@
+<view
+  class="scrollarea"
+  scroll-y
+  show-scrollbar="{{false}}"
+  type="custom"
+>
+  <view class="bg">
+    <view class="bg-wrapper">
+      <image src="{{IMG_PRE + 'user-bg.png'}}" mode="widthFix" />
+    </view>
+    <view class="info">
+      <view class="info-wrapper" bindtap="handleEditUserInfo">
+        <view class="info-edit"></view>
+        <view class="avatar-wrapper">
+          <image src="{{userInfo.avatar}}" />
+        </view>
+      </view>
+      <view class="info-text">
+        <view class="info-text-name">
+          <text class="info-text-nickname">{{userInfo.nickName}}</text>
+          <text wx:if="{{userInfo.sex}}" class="name-sex{{userInfo.sex == '1' ? '-girl' : '-boy'}}"></text>
+        </view>
+        <text class="info-text-id">{{userInfo.mobile}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="account">
+      <view
+        wx:for="{{account}}"
+        wx:key="index"
+        class="account-item"
+      >
+        <view class="account-label">{{item.label}}</view>
+        <view class="account-number">{{item.value}}</view>
+        <!-- <view class="account-">1</view> -->
+      </view>
+    </view>
+    <view class="entries">
+      <view
+        wx:for="{{entries}}"
+        wx:key="index"
+        class="entries-item"
+        data-item="{{item}}"
+        bindtap="handleToPath"
+      >
+        <image class="entries-icon" src="{{IMG_PRE + item.icon}}.png" mode="widthFix" />
+        <view class="entries-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+</view>

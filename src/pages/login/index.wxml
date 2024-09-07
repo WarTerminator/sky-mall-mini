@@ -1,0 +1,7 @@
+<navigation-bar title="登陆" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<view class="scrollarea">
+  <view >已阅读协议</view>
+  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+  <view >快捷登录</view>
+  <view >暂不登录</view>
+</view>

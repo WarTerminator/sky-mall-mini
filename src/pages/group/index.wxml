@@ -1,0 +1,4 @@
+<navigation-bar title="拼团" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<view class="page-camp">
+  <text>拼团/众筹</text>
+</view>

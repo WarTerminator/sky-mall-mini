@@ -1,0 +1,70 @@
+@import '../../variables.scss';
+.weui-navigation-bar {
+  overflow: hidden;
+  color: rgba(0, 0, 0, .9);
+  width: 100vw;
+}
+.weui-navigation-bar__placeholder {
+  position: relative;
+}
+
+.weui-navigation-bar__inner, .weui-navigation-bar__inner .weui-navigation-bar__left {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.weui-navigation-bar__inner {
+  padding: 0 28rpx;
+  position: relative;
+  // padding-right: 95px;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.weui-navigation-bar__inner .weui-navigation-bar__left {
+  position: relative;
+  /* width: 95px; */
+  // padding-left: 16px;
+  box-sizing: border-box;
+}
+.weui-navigation-bar__right {
+  min-width: 44rpx;
+}
+.weui-navigation-bar__btn_goback_wrapper {
+  padding: 22rpx 36rpx 22rpx 32rpx;
+  margin: -22rpx -36rpx -22rpx -32rpx;
+}
+
+.weui-navigation-bar__inner .weui-navigation-bar__left .weui-navigation-bar__btn_goback, .weui-navigation-bar__btn_home {
+  @include bgImg(44, 38, 'back.png');
+}
+.weui-navigation-bar__btn_home {
+  // @include bgImg(28, 26, 'home.png');
+  @include bgImg(58, 58, 'home-2.png');
+}
+
+.weui-navigation-bar__inner .weui-navigation-bar__center {
+  text-align: center;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 50rpx;
+  text-align: center;
+  // color: #26292C;
+}
+
+@media(prefers-color-scheme: dark) {
+  .weui-navigation-bar {
+    color: hsla(0, 0%, 100%, .8);
+  }
+  .weui-navigation-bar__inner {
+    background-color: #1f1f1f;
+  }
+}

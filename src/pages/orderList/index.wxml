@@ -1,0 +1,38 @@
+<navigation-bar title="我的订单" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<view class="scrollX" scroll-x type="list" show-scrollbar="{{false}}">
+  <view class="tab {{currentTabStatus == item.status ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="index" data-status="{{item.status}}" bindtap="handleTab">{{item.label}}</view>
+</view>
+<scroll-view class="scrollY" scroll-y type="list" bindscrolltolower="handleScrollEnd">
+  <view wx:if="{{orderList.length}}" class="card" wx:for="{{orderList}}" wx:key="index" data-item="{{item}}" bindtap="handleToDetail">
+    <view class="card-number">
+      <view class="card-number-order">订单编号  {{item.orderNumber}}</view>
+      <view class="card-number-date">{{item.createTime}}</view>
+    </view>
+    <view class="card-info">
+      <view class="card-info-left">
+        <image src="{{item.orderItemDtos[0].pic}}" mode="widthFix" />
+      </view>
+      <view class="card-info-right">
+        <view class="card-info-title">{{item.orderItemDtos[0].prodName}}</view>
+        <view class="card-info-sku">规格  {{item.orderItemDtos[0].skuName || '默认'}}</view>
+        <view class="card-info-amount">数量 x{{item.orderItemDtos[0].prodCount}}</view>
+        <view class="card-info-price">单价  ¥{{item.orderItemDtos[0].price}}</view>
+      </view>
+    </view>
+    <view class="card-finally-price">
+      共{{item.orderItemDtos[0].prodCount}}件商品 . 应付
+      <text class="card-finally-price-unit">{{item.actualTotal}}</text>
+    </view>
+    <!-- <view class="card-info-trans"></view> -->
+    <view class="card-state">
+      <view class="card-state-text">{{getOrderStatusText(item.status)}}</view>
+      <view class="card-state-order">
+        <!-- <view wx:if="{{[2,3,4,5].includes(1)}}" class="card-state-service">申请售后</view>
+        <view wx:if="{{[3,4,5].includes(1)}}" class="card-state-logistics">查看物流</view> -->
+        <view wx:if="{{item.status===3}}" class="card-state-delivered" data-item="{{item}}" data-index="{{index}}" catchtap="handleGot">确认收货</view>
+        <view wx:if="{{item.status===1}}" class="card-state-apply" data-item="{{item}}" data-index="{{index}}" catchtap="handlePay">支付</view>
+      </view>
+    </view>
+  </view>
+  <view class="{{!loading && !orderList.length ? 'empty' : 'scroll-bottom'}}"></view>
+</scroll-view>

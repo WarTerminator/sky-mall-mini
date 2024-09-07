@@ -1,0 +1,79 @@
+<!--抽卡feeds-->
+<navigation-bar title="抽卡列表" back="{{true}}" background="transparent" />
+<view class="sort-wrap">
+  <view
+    wx:for="{{sort}}"
+    wx:key="key"
+    class="sort-item {{ item.key === activeSort ? 'active' : '' }}"
+    data-key="{{item.key}}"
+    bind:tap="handleSwitchSort"
+  >
+    <text>{{item.name}}</text>
+  </view>
+</view>
+<!-- refresher-default-style="white" -->
+<scroll-view
+  class="blind-box-feeds"
+  type="custom"
+  scroll-y
+  refresher-enabled
+  refresher-triggered="{{refresherTriggered}}"
+  bindrefresherrefresh="onRefresherRefresh"
+>
+  <view class="blind-box-list">
+    <view
+      class="blind-box-item"
+      wx:for="{{blindBoxList}}"
+      wx:key="prodId"
+      data-item="{{item}}"
+      bind:tap="handleJumpToDetail"
+    >
+      <view class="item-content">
+        <image
+          mode="aspectFill"
+          src="{{'https://objects.buff-box.com/' + item.feedsImg}}"
+          class="item-bg-img"
+        ></image>
+        <view class="img-shadow"></view>
+        <view class="item-info-wrap">
+          <text class="item-title">{{item.prodName}}</text>
+          <view class="item-extra-wrap">
+            <view class="progress-wrap">
+              <view class="progress-line">
+                <view
+                  class="progress-inner"
+                  style="width: {{ func.toFixed(12 / 32 * 100, 0) + '%' }};"
+                >
+                </view>
+              </view>
+              <text class="progress-count">已收集12</text>
+              <text class="progress-total">/131</text>
+            </view>
+            <view class="action-btn" hover-class="active">
+              <text>去抽卡</text>
+              <image src="https://img.war6sky.com/2024/08/777e1cd4065e4c2ab72b478968c8b78b.png" />
+            </view>
+          </view>
+        </view>
+        <view class="item-tag">全新发售</view>
+        <transformer-swiper
+          class="img-swiper"
+          images="{{['https://img.war6sky.com/2024/08/6899c6068eec424fb5962cd9b7200229.png', 'https://img.war6sky.com/2024/08/ed04ab4877af4d8488562eb97e4a3686.png', 'https://img.war6sky.com/2024/08/dc18a0a70c06449283b095fd135cf699.png']}}"
+        ></transformer-swiper>
+      </view>
+      <image src="{{'https://objects.buff-box.com/' + item.ipInfo.pic}}" mode="aspectFit" class="item-icon"></image>
+    </view>
+  </view>
+</scroll-view>
+
+<wxs module="func">
+  module.exports = {
+    toFixed: function (number, digits) {
+      if (typeof number !== 'number') {
+        return number;
+      }
+
+      return number.toFixed(digits);
+    },
+  };
+</wxs>

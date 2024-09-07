@@ -1,0 +1,175 @@
+<navigation-bar
+  isShared="{{isShared}}"
+  color="black"
+  background="#FFF"
+>
+  <view class="nav-center" slot="center">
+    官方授权，正品保证，放心购买
+  </view>
+</navigation-bar>
+<scroll-view
+  class="scroll-area"
+  scroll-y
+  show-scrollbar="{{false}}"
+  type="custom"
+>
+  <view class="product-pic-section">
+    <swiper
+      class="product-pic-section-swiper"
+      autoplay="{{true}}"
+      bindchange="handleSwiperChange"
+    >
+      <swiper-item wx:if="{{goodsInfo.video}}">
+        <view class="swiper-item">
+          <video
+            class="swiper-item-pic"
+            src="{{goodsInfo.video}}"
+            show-play-btn="{{true}}"
+            controls
+          ></video>
+        </view>
+      </swiper-item>
+      <block wx:for="{{swiperImgs}}" wx:key="{{index}}">
+        <swiper-item bindtap="handlePreviewShow">
+          <view class="swiper-item">
+            <image mode="widthFix" class="swiper-item-pic" src="{{item}}" />
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <text wx:if="{{swiperImgs.length}}" class="swiper-item-count">{{swiperCurrent+1}}/{{swiperImgs.length + (goodsInfo.video ? 1 : 0)}}</text>
+  </view>
+  <view class="product-info-section">
+    <view class="info-price">
+      <view class="info-price-left">
+        <text class="info-price-now">{{goodsInfo.price}}</text>
+        <text wx:if="{{goodsInfo.oriPrice}}" class="info-price-original">¥{{goodsInfo.oriPrice}}</text>
+      </view>
+      <text class="info-collection {{isCollection ? 'active' : ''}}" bindtap="handleCollection"></text>
+      <!-- <text class="info-price-sale">{{goodsInfo.soldNum}}+人付款</text> -->
+    </view>
+    <view class="info-title">
+      {{goodsInfo.prodName}}
+    </view>
+    <view class="info-discount">
+      <text wx:if="{{vipOption.discount}}" class="info-discount-vip">会员{{vipOption.discount}}折</text>
+      <text wx:if="{{goodsInfo.useScoreLimit}}" class="info-discount-power">能量抵{{goodsInfo.useScoreLimit}}%</text>
+    </view>
+  </view>
+  <view class="product-CPFR">
+    <text class="product-CPFR-title">补货说明</text>
+    每天<text class="product-CPFR-font">中午11:00补货</text>，请确认好地址后下单。
+  </view>
+  <view class="product-tip">
+    <view class="product-tip-title" bindtap="handleToggleTip">
+      <text class="product-tip-logo"></text>
+      <text class="product-tip-text">温馨提示</text>
+    </view>
+    <view wx:if="{{toggleTip}}" class="product-line"></view>
+    <view class="product-tip-content{{toggleTip ? '' : '-hidden'}}">
+      盲盒类产品不支持7天无理由退货,请确认后再拍下商品;请您在收货时录制开箱视频,开箱视频将作为唯一售后凭证;由于本品为限量生产并按照一定比例随机插放、发行,无法单独挑选或以伤痕、污渍、磨损等理由进行产品更换,敬请谅解!未成年人请勿下单购买。
+    </view>
+  </view>
+  <sticky-section wx:if="{{isDesign}}" push-pinned-header="{{false}}">
+    <sticky-header style="position: sticky; top: 0; z-index: 1; display: block;">
+      <scroll-view
+        class="tab-list"
+        scroll-x
+        type="list"
+        show-scrollbar="{{false}}"
+        enable-flex
+        scroll-with-animation
+        scroll-into-view="{{intoView}}"
+        scroll-into-view-alignment="center"
+      >
+        <block wx:for="{{tabs}}" wx:key="id">
+          <view class="tab-item" id="tab-{{index}}">
+            <text class="tab-name {{tabSelected === index ? 'selected' : ''}}" data-id="{{index}}" bindtap="handleTab">{{item.name}}</text>
+          </view>
+        </block>
+      </scroll-view>
+    </sticky-header>
+  </sticky-section>
+  <view class="product-imgs">
+    <video
+      wx:if="{{goodsInfo.video}}"
+      class="product-imgs-item"
+      src="{{goodsInfo.video}}"
+      show-play-btn="{{true}}"
+      controls
+    ></video>
+    <block wx:for="{{swiperImgs}}" wx:key="{{index}}">
+      <image mode="widthFix" class="product-imgs-item" src="{{item}}" />
+    </block>
+  </view>
+  <view class="product-action-block"></view>
+</scroll-view>
+
+<view class="product-sku{{showSkuPop ? '' : '-hidden'}}">
+  <view class="product-sku-mask" bindtap="handleSkuClose"></view>
+  <view class="product-sku-content">
+    <view class="product-CPFR">
+      <text class="product-CPFR-title">补货说明</text>
+      每天<text class="product-CPFR-font">中午11:00补货</text>，请确认好地址后下单。
+      <view class="product-sku-close" bindtap="handleSkuClose"></view>
+    </view>
+    <view class="sku-info">
+      <view class="sku-info-image" bindtap="handlePreviewShow">
+        <image mode="widthFix" class="sku-info-image-current" src="{{currentSkuItem.pic || swiperImgs[0]}}"  />
+        <text class="sku-info-image-detail"></text>
+      </view>
+      <view class="sku-info-des">
+        <text class="sku-info-title">{{goodsInfo.prodName}}</text>
+        <text class="sku-info-price">{{currentSkuItem.price || goodsInfo.actualTotal}}</text>
+      </view>
+    </view>
+    <view class="sku-select">
+      <view class="sku-select-title">选择规格</view>
+      <view class="sku-select-items">
+        <block
+          wx:for="{{goodsInfo.skuList}}"
+        >
+          <view
+            class="sku-select-item{{currentSkuItem.skuId==item.skuId ? '-active' : ''}}"
+            wx:if="{{item.skuName}}"
+            wx:key="skuId"
+            data-item="{{item}}"
+            bindtap="handleSelectSku"
+          >
+            {{item.skuName}}
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="sku-count">
+      <view class="sku-select-title">购买数量</view>
+      <view class="sku-count-box">
+        <view class="sku-count-sub" bindtap="handleSub">-</view>
+        <view class="sku-count-number">{{currentCount}}</view>
+        <view class="sku-count-add" bindtap="handleAdd">+</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="product-action">
+  <button wx:if="{{!showSkuPop}}" open-type="share" class="product-share">
+    <view class="product-share-icon"></view>
+  </button>
+  <view wx:if="{{!showSkuPop}}" class="product-action-btn" bindtap="handleBuy">立即{{isDesign ? '定制' : '购买'}}</view>
+  <view wx:else class="product-action-ensure" bindtap="handleEnsure">
+    确认
+  </view>
+</view>
+<view wx:if="{{previewShow}}" class="product-pic-preview" bindtap="handlePreviewClose">
+  <swiper class="preview-swiper" bindchange="handlePreviewChange">
+    <block wx:for="{{swiperImgs}}" wx:key="{{index}}">
+      <swiper-item class="preview-swiper-item">
+        <view class="preview-item">
+          <image mode="widthFix" class="preview-item-pic" src="{{item}}" />
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <text class="swiper-item-count">{{previewCurrent+1}}/{{swiperImgs.length}}</text>
+</view>

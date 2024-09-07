@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "dot-decoration": "./dot-decoration",
+    "pop-adapter": "./pop-adapter"
+  },
+  "disableScroll": true,
+  "renderer": "webview",
+  "navigationStyle": "custom"
+}
