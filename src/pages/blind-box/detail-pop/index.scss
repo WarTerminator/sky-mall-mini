@@ -44,13 +44,12 @@
     line-height: 34rpx;
     color: #B1B1B1;
 
-    .sub-title {
-      color: #FFFFFF;
+    .rich-text-wrap {
+      padding: 0 28rpx;
     }
 
-    view {
-      padding: 0 28rpx;
-      margin-bottom: 34rpx;
+    .sub-title {
+      color: #FFFFFF;
     }
   }
 }

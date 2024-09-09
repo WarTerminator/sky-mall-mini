@@ -1,4 +1,3 @@
-import { mallApi } from '../../api/index';
 import { IMG_PRE } from '../../constant/host';
 
 Page<any,any>({
@@ -22,20 +21,20 @@ Page<any,any>({
       {
         label: '我的订单',
         icon: 'order',
-        path: '../orderList/index'
+        path: '../order/index'
       },
-      {
-        label: '我的收藏',
-        icon: 'collection'
-      },
-      {
-        label: '兑换中心',
-        icon: 'exchange'
-      },
-      {
-        label: '我的集册',
-        icon: 'books'
-      },
+      // {
+      //   label: '我的收藏',
+      //   icon: 'collection'
+      // },
+      // {
+      //   label: '兑换中心',
+      //   icon: 'exchange'
+      // },
+      // {
+      //   label: '我的集册',
+      //   icon: 'books'
+      // },
       {
         label: '地址管理',
         icon: 'location',
@@ -91,7 +90,7 @@ Page<any,any>({
   },
   handleToOrder() {
     wx.navigateTo({
-      url: '../orderList/index'
+      url: '../order/index'
     })
   },
   handleToPath(e:any) {
@@ -104,7 +103,7 @@ Page<any,any>({
   },
   handleEditUserInfo() {
     wx.navigateTo({
-      url: '../userInfo/index'
+      url: '/pages/my/userInfo'
     })
   }
 })

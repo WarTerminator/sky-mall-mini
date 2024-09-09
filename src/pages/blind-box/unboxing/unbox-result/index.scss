@@ -15,6 +15,17 @@
     bottom: 0;
     background: rgba($color: #000000, $alpha: .6);
     z-index: 100;
+    @include flexRowCenter;
+
+    &.light::before {
+      content: '';
+      width: 700rpx;
+      height: 700rpx;
+      background: url('https://img.war6sky.com/2024/09/f61ea6fc5fe842eb824e74eb1e7153c7.png') no-repeat center center;
+      background-size: 100% 100%;
+      animation: lightRotate 8s linear infinite;
+      margin-bottom: 200rpx;
+    }
   }
 
   .card-wrap {
@@ -58,11 +69,15 @@
       @include flexRowCenter;
     }
 
-    .close-btn {
+    .jump-btn {
       margin-right: 50rpx;
+    }
+
+    .close-btn {
       background: transparent;
       box-sizing: border-box;
-      border: 4rpx solid #0AB2FF;
+      border: 2rpx solid #0AA6FC;
+      color: #0AA6FC;
     }
   }
 }
@@ -125,4 +140,13 @@
   to {
     opacity: 1;
   }
+}
+
+@keyframes lightRotate {  
+  from {  
+    transform: rotate(0deg);  
+  }  
+  to {  
+    transform: rotate(360deg);  
+  }  
 }

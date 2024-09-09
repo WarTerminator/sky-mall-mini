@@ -5,14 +5,15 @@
     <view class="tab-item {{onlyMine ? 'selected' : ''}}" data-item="mine" bind:tap="handlwSwitchTab">我的抽卡记录</view>
   </view>
   <view class="tip-wrap">* 记录每3分钟更新</view>
-  <scroll-view scroll-y class="scroll-wrap">
+  <scroll-view scroll-y class="scroll-wrap" show-scrollbar="{{false}}" bind:scrolltolower="handleLoadMore">
     <view class="record-list">
-      <view wx:for="{{[1,2,3,4,5,6,7,8]}}" wx:key="*this" class="record-item">
-        <image class="item-img" src="https://img.war6sky.com/2024/08/6899c6068eec424fb5962cd9b7200229.png" mode="aspectFit"></image>
-        <view class="item-title">KPL 夏日主题 明星典藏小卡   一诺</view>
-        <image class="user-avatar" src="https://img.war6sky.com/2024/08/6899c6068eec424fb5962cd9b7200229.png" mode="aspectFill"></image>
-        <view class="record-time">2024-07-25     16:10:15</view>
+      <view wx:for="{{records}}" wx:key="*this" class="record-item">
+        <image class="item-img" src="{{'https://objects.buff-box.com/' + item.bagPic}}" mode="aspectFit"></image>
+        <view class="item-title">{{item.showName}}</view>
+        <image class="user-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <view class="record-time">{{item.recordTime}}</view>
       </view>
     </view>
+    <view wx:if="{{hasMore}}" class="sroll-end">更多加载中...</view>
   </scroll-view>
 </view>

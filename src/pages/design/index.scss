@@ -1,0 +1,158 @@
+@import '../../variables.scss';
+.scroll-area {
+  background: #FBFBFB;
+}
+.category {
+  margin-top: 41rpx;
+  position: relative;
+  margin-left: 37rpx;
+  // width: 664rpx;
+  height: 276rpx;
+  &::before {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: 230rpx;
+    border-radius: 26rpx;
+    z-index: -1;
+    background: linear-gradient(0deg, #FBFBFB 0%, #FFFFFF 49%, #AACFF6 99%);
+  }
+  &-content {
+    position: relative;
+    left: -10rpx;
+    @include flexRowCenter;
+  }
+  &-item {
+    position: relative;
+  }
+  image {
+    width: 180rpx;
+    height: 276rpx;
+  }
+  &-name {
+    left: 20rpx;
+    bottom: 12rpx;
+    position: absolute;
+    font-size: 21rpx;
+    color: #FFFFFF;
+  }
+}
+
+.recommend {
+  margin-top: 33rpx;
+  margin-left: 32rpx;
+  padding: 18rpx 15rpx;
+  width: 684rpx;
+  height: 429rpx;
+  border-radius: 26rpx;
+  background: linear-gradient(298deg, #EDFBFC 1%, #EBF4FE 100%);
+  &-title {
+    @include flexRowBetween;
+    height: 82rpx;
+    &-left {
+      padding-left: 28rpx;
+      font-family: system-ui;
+      font-weight: 500;
+      font-size: 36rpx;
+      color: #3464E0;
+    }
+    &-right {
+      align-self: flex-end;
+      @include flexRowCenter;
+      justify-content: flex-end;
+      padding: 12rpx;
+      padding-right: 24rpx;
+      width: 60%;
+      height: 64rpx;
+      font-size: 20rpx;
+      color: #7E7E7E;
+      background: #fff;
+      border-top-left-radius: 26rpx;
+      border-top-right-radius: 26rpx;
+    }
+  }
+  &-goods {
+    @include flexRowStart;
+    &-wrapper {
+      padding-top: 16rpx;
+      background: #fff;
+      border-radius: 26rpx;
+      border-top-right-radius: 0rpx;
+    }
+    &-item {
+      width: 176rpx;
+      height: 238rpx;
+    }
+    .good-pic {
+      width: 176rpx;
+      height: 174rpx;
+      overflow: hidden;
+    }
+    image {
+      width: 176rpx;
+      border-radius: 26rpx;
+    }
+    .good-name {
+      width: 100%;
+      margin: 12rpx 0;
+      font-size: 20rpx;
+      font-weight: normal;
+      color: #101010;
+      text-align: center;
+    }
+    .good-price {
+      padding: 0 12rpx;
+      margin-left: 28rpx;
+      box-sizing: border-box;
+      @include flexRowBetween;
+      @include bgImg(131, 24, 'camp-good-btn.png');
+      &-num {
+        font-size: 22rpx;
+        color: #FFFFFF;
+      }
+      &-text {
+        font-size: 19rpx;
+        color: #E9E9E9;
+      }
+    }
+  }
+}
+.tab-wrapper {
+  position: sticky;
+  top: -1rpx;
+  z-index: 1;
+}
+.tab-list {
+  padding: 0 38rpx;
+  background-color: #fff;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-item {
+  display: flex;
+  flex-shrink: 0;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+  // padding-left: 40px;
+}
+.tab-item:first-child {
+  padding-left: 20px;
+}
+
+.tab-name {
+  color: #989898;
+  font-size: 32rpx;
+  transition: transform .3s;
+  &.selected {
+    transform: scale(1.2);
+    font-size: 32rpx;
+    color: #4C65E3;
+    font-weight: bold;
+  }
+}

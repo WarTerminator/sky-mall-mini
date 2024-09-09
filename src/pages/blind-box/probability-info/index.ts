@@ -16,5 +16,10 @@ Component({
     handleClose() {
       this.triggerEvent('close');
     },
+    jumpToCardAlbum() {
+      wx.navigateTo({
+        url: `../card-album/index?gameItemId=${this.properties.blindBox.gameItemId}`,
+      });
+    }
   }
 })

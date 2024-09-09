@@ -1,13 +1,31 @@
 <view class="goods" bindtap="handleDetail">
   <image mode="widthFix" class="goods-icon" fade-in src="{{item.pic}}" />
-  <view class="goods-title">
-    <text>{{item.prodName}}</text>
-  </view>
+  <span class="goods-title">
+    <text wx:if="{{type == 'group' && item.activityStatus}}" class="goods-title-tag">{{utils.getOrderStatusText(item.activityStatus)}}</text>
+    {{item.prodName || item.activityName}}
+  </span>
   <view class="goods-info">
-    <view class="goods-info-price">{{item.price}}</view>
-    <view wx:if="{{item.shopName}}" class="goods-info-shop">
-      <image mode="widthFix" class="shop-icon" fade-in src="{{IMG_HOST}}/{{item.shopLogo}}" />
+    <view wx:if="{{item.price}}" class="goods-info-price">{{item.price}}</view>
+    <view wx:if="{{item.shopName && type !== 'group'}}" class="goods-info-shop">
+      <image wx:if="{{item.shopLogo}}" mode="widthFix" class="shop-icon" fade-in src="{{IMG_HOST}}/{{item.shopLogo}}" />
       {{item.shopName}}
+    </view>
+    <view wx:if="{{type == 'group'}}" class="goods-group">
+      <view class="goods-group-left">已拼团 {{item.cgpOrderCount}}</view>
+      <view class="goods-group-right">成团金额 ¥{{item.targetAmount}}</view>
     </view>
   </view>
 </view>
+
+<wxs module="utils">
+  module.exports = {
+    // 获取活动状态（活动状态：1:未开始、2:进行中、3:已结束、4:已失效）
+    getOrderStatusText: function(status){
+      if (status ===1) return '未开始';
+      if (status ===2) return '进行中';
+      if (status ===3) return '已结束';
+      if (status ===4) return '已失效';
+      return '';
+    }
+  };
+</wxs>

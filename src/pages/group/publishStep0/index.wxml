@@ -1,0 +1,66 @@
+<navigation-bar title="发布创意" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view type="custom" scroll-y show-scrollbar="{{false}}" class="content">
+  <view class="header">
+    <view class="header-step0">
+      <text class="header-step0-select"></text>
+      <text class="header-step0-text">基础信息</text>
+    </view>
+    <view class="header-line"></view>
+    <view class="header-step1">
+      <text class="header-step1-select"></text>
+      <text class="header-step1-text">首次更新</text>
+    </view>
+  </view>
+  <view class="form" catchsubmit="handleSubmit">
+    <view class="form-row type">
+      <view class="form-label">创意类别</view>
+      <view class="form-content picker">
+        <picker class="picker-item" bindchange="bindPickerChange" range-key="name" value="{{categoryIndex}}" range="{{category}}">
+          <view class="form-content-select">
+            {{
+              category[categoryIndex].name || '请选择>'
+            }}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="form-row title">
+      <view class="form-label">项目标题</view>
+      <view class="form-content">
+        <textarea bindinput="handleTitleChange" maxlength="{{26}}" class="form-area" type="text" value="{{activityName}}" placeholder="请输入项目标题（限26个字）" />
+      </view>
+    </view>
+    <view class="form-row swiper">
+      <view class="form-label">轮播图</view>
+      <view class="form-content">
+        <view class="form-content-text">轮播图建议宽度1080px，宽高比在4:5或5:4之间，最多可上传5张格式jpg、png、不大于5MB</view>
+        <view class="form-content-pics">
+          <view class="form-content-pic" wx:for="{{rotateImgs}}" wx:key="index">
+            <image src="{{item}}" />
+          </view>
+          <view bindtap="handleUploadSwiperPic" wx:if="{{rotateImgs.length < maxImgCount}}" class="form-content-pic">
+            <text >上传图片</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="form-row description">
+      <view class="form-label">内容</view>
+      <view class="form-content">
+        <text class="form-content-tip">{{content.length}}/400</text>
+        <textarea bindinput="handleDescriptionChange" type="text" auto-height="{{true}}" maxlength="{{400}}" class="form-area" value="{{content}}" placeholder="说点什么吧..." />
+      </view>
+      <view class="form-content-pics">
+        <view class="form-content-pic" wx:for="{{media}}" wx:key="index">
+          <image src="{{item}}" />
+        </view>
+        <view bindtap="handleUploadDesPic" wx:if="{{media.length < maxImgCount}}" class="form-content-pic">
+          <text >上传图片</text>
+        </view>
+      </view>
+    </view>
+    <view class="step {{activityName && rotateImgs.length && content && categoryIndex? 'active' : ''}}" bindtap="handleNext">下一步</view>
+    <view class="block"></view>
+  </view>
+</scroll-view>
+

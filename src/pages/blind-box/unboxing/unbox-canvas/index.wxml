@@ -1,4 +1,15 @@
 <!--pages/blind-box/unboxing/unbox-canvas/index.wxml-->
-<view wx:if="{{show}}" class="unbox-canvas" bind:tap="handleActiveUnbox">
-  <canvas type="2d" id="blind-box-canvas" style="width: {{width}}px; height: {{height}}px;"></canvas>
+<view wx:if="{{show}}" class="unbox-canvas">
+  <canvas
+    type="2d"
+    id="blind-box-canvas"
+    style="width: {{width}}px; height: {{height}}px;"
+    bind:touchstart="onTouchStart"
+    bind:touchmove="onTouchMove"
+    bind:touchend="onTouchEnd"
+  ></canvas>
+  <view class="action-wrap" wx:if="{{!unboxing}}">
+    <text>沿虚线滑开或点击按钮拆包</text>
+    <view class="action-btn" bind:tap="handleActiveUnbox">点击拆包</view>
+  </view>
 </view>

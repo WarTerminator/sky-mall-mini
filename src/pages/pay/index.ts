@@ -52,6 +52,7 @@ Page<any,any>({
       // 切换地址后
       this.setData({
         addressSelected: data,
+        noAddress: false,
       });
       this.orderConfirm();
     });
@@ -69,7 +70,7 @@ Page<any,any>({
   handleAddress() {
     if (this.data.noAddress) {
       wx.navigateTo({
-        url: '../addressAdd/index?from=pay'
+        url: '../address/update?from=pay'
       })
     } else {
       wx.navigateTo({
@@ -131,6 +132,9 @@ Page<any,any>({
   },
   // 提交订单
   handleSubmit () {
+    if (this.data.noAddress) return wx.showToast({
+      title: '请添加地址'
+    })
     wx.showLoading({
       title: '支付中...'
     });
@@ -153,7 +157,7 @@ Page<any,any>({
           icon: 'error',
         });
         return wx.redirectTo({
-          url: '../orderList/index?state=1'
+          url: '../order/index?state=1'
         });
       }
       return mallApi.pay({
@@ -162,7 +166,7 @@ Page<any,any>({
         // @ts-ignore
         if (this.data.orderDetail.actualTotal == 0) {
           return wx.redirectTo({
-            url: `../payResult/index?orderNumber=${data.orderNumbers}`
+            url: `../pay/result?orderNumber=${data.orderNumbers}`
           });
         }
         wx.requestPayment({
@@ -173,12 +177,12 @@ Page<any,any>({
           paySign: res.paySign,
           success () {
             wx.redirectTo({
-              url: `../payResult/index?orderNumber=${data.orderNumbers}`
+              url: `../pay/result?orderNumber=${data.orderNumbers}`
             })
           },
           fail (res) {
             wx.redirectTo({
-              url: '../orderList/index?state=1'
+              url: '../order/index?state=1'
             });
             // wx.showToast({
             //   title: res.errMsg,
@@ -195,7 +199,7 @@ Page<any,any>({
       });
     }).catch(err => {
       wx.showToast({
-        title: JSON.stringify(err),
+        title: JSON.stringify(err?.data || err),
         icon: 'error',
       })
     }).finally(() => wx.hideLoading());

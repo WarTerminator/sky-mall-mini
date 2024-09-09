@@ -5,6 +5,10 @@ Component({
     item: {
       type: Object,
       value: {}
+    },
+    type: {
+      type: String,
+      value: ''
     }
   },
   data: {
@@ -12,9 +16,17 @@ Component({
   },
   methods: {
     handleDetail() {
-      wx.navigateTo({
-        url: `/pages/product/index?prodId=${this.data.item.prodId}`
-      })
+      const item = this.data.item;
+      if (this.data.type === 'group') {
+        // TODO
+        wx.navigateTo({
+          url: ``
+        })
+      } else {
+        wx.navigateTo({
+          url: `/pages/product/index?prodId=${item.prodId || item.cgpActivityId}&shopId=${item.shopId}&from=${this.data.type}`
+        })
+      }
     },
   }
 })

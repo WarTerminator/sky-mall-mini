@@ -1,7 +1,7 @@
 <navigation-bar title="地址管理" back="{{true}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
+<view class="scrollarea">
   <view class="header">
-    <text class="header-title">常用地址</text>
+    <text wx:if="{{addressList.length}}" class="header-title">常用地址</text>
     <text wx:if="{{addressList.length}}" class="header-btn" bindtap="handleToAdd">添加地址</text>
   </view>
   <view wx:for="{{addressList}}" class="card" wx:key="addrId" data-item="{{item}}" bindtap="handleSelect">
@@ -22,4 +22,4 @@
   </view>
   <view class="scroll-bottom"></view>
   <view wx:if="{{!addressList.length}}" class="card-empty" bindtap="handleToAdd">添加地址</view>
-</scroll-view>
+</view>

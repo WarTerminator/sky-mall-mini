@@ -1,18 +1,19 @@
 <!--概率规则-->
 <view class="probability-info">
   <view class="title-wrap">
-    <text>卡册图鉴</text>
+    <view>卡册图鉴</view>
+    <view class="album-enter" bind:tap="jumpToCardAlbum"></view>
     <view class="close-btn" bind:tap="handleClose"></view>
   </view>
   <view class="top-tip">注：抽卡机为不凡自组产品，抽出概率不完全等同于出厂概率</view>
   <view class="sub-title">本抽卡机内包含以下商品：</view>
-  <scroll-view class="scroll-wrap" scroll-y>
+  <scroll-view class="scroll-wrap" scroll-y show-scrollbar="{{false}}">
     <view class="probability-list">
       <view class="probability-item" wx:for="{{blindBox.categories}}" wx:key="name">
         <view class="probability-title">{{item.name}}</view>
         <!-- <view class="stock-info">官方共8款，本抽卡机包含4</view> -->
         <view class="card-list">
-          <view wx:for="{{item.children}}" wx:for-item="card" class="card-item">
+          <view wx:for="{{item.children}}" wx:for-item="card" wx:key="id" class="card-item">
             <image src="{{'https://objects.buff-box.com/' + card.bagPic}}" mode="aspectFit"></image>
             <text>{{card.probability}}%</text>
           </view>

@@ -26,25 +26,84 @@ const blindBoxService = {
       },
     });
   },
+  executeTrialDraw (data: {
+    assetId: string | number,
+  }) {
+    return request({
+      host: Host.API,
+      method: 'POST',
+      url: '/p/luckyDrawInfo/user-lucky-draw-info/tryConsumeDrawCards',
+      data,
+    });
+  },
   executeDraw (data: {
-    count: number,
-    gameItemId: string,
+    userAssetId: string[],
+    assetId: string | number,
   }) {
     return request({
       host: Host.API,
       method: 'POST',
       url: '/p/luckyDrawInfo/user-lucky-draw-info/consumeDrawCards',
-      data,
+      data: {
+        assetType: 1,
+        status: 0,
+        ...data,
+      },
     });
   },
-  getStorageLocker () {
+  getUserAsset (data: {
+    current?: number;
+    size?: number;
+    fillUpDetailInfo?: boolean;
+    assetTypes?: number[];
+    statusList?: number[];
+    assetIds?: number[];
+  }) {
     return request({
       host: Host.API,
       method: 'POST',
-      url: `/p/userasset/query?size=${10}&current=${1}`,
+      url: `/p/userasset/query`,
       data: {
-        fillUpDetailInfo: true,
+        ...data,
+        page: data.current || 1,
+        size: data.size || 20,
       },
+    });
+  },
+  getUnboxRecord (data: {
+    current?: number;
+    size?: number;
+    gameItemId: string | number,
+    status: 0 | 1,
+  }) {
+    return request({
+      host: Host.API,
+      method: 'POST',
+      url: '/p/luckyDrawInfo/user-lucky-draw-info/drawCardsLog',
+      data: {
+        ...data,
+        current: data.current || 1,
+        size: data.size || 10,
+      },
+    });
+  },
+  createDispatchOrder (data: {
+    addrId: number;
+    userAssetIds: number[];
+    uuid: string;
+  }) {
+    return request({
+      host: Host.API,
+      method: 'POST',
+      url: '/p/order/assetConfirm',
+      data,
+    });
+  },
+  getCardAlbum(guideId: number | string) {
+    return request({
+      host: Host.API,
+      method: 'GET',
+      url: `/p/illustrated_guide/getGuideInfo/${guideId}`,
     });
   },
 };

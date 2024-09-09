@@ -1,6 +1,6 @@
 <!--pages/blind-box/unboxing/unbox-large-result/index.wxml-->
 <view class="unbox-large-result">
-  <scroll-view class="scroll-wrap {{showFlipSwiper ? 'hide' : ''}}" scroll-y>
+  <scroll-view class="scroll-wrap {{showFlipSwiper ? 'hide' : ''}}" scroll-y show-scrollbar="{{false}}">
     <view class="card-list">
       <view wx:for="{{cards}}" wx:key="value" class="card-item" data-item="{{item}}" bind:tap="onCardBackClick">
         <image wx:if="{{item.special && !allFlipped}}" class="card-img" src="https://img.war6sky.com/2024/08/85f95f16088048ee937374b58bad37a9.png"></image>
@@ -11,8 +11,8 @@
   </scroll-view>
   <view class="btn-wrap {{showFlipSwiper ? 'hide' : ''}}">
     <block wx:if="{{allFlipped}}">
-      <view class="close-btn" bind:tap="handleClose">继续抽卡</view>
-      <view class="jump-btn" bind:tap="jumpToStorageLocker">去发货</view>
+      <view wx:if="{{!isTrial}}" class="jump-btn" bind:tap="jumpToStorageLocker">去发货</view>
+      <view class="close-btn" bind:tap="handleClose">再抽一次</view>
     </block>
     <view wx:else class="flip-btn" bind:tap="handleFlip">翻卡</view>
   </view>

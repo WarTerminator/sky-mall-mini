@@ -73,11 +73,15 @@
       @include flexRowCenter;
     }
 
-    .close-btn {
+    .jump-btn {
       margin-right: 50rpx;
+    }
+
+    .close-btn {
       background: transparent;
       box-sizing: border-box;
-      border: 4rpx solid #0AB2FF;
+      border: 2rpx solid #0AA6FC;
+      color: #0AA6FC;
     }
 
     &.hide {
@@ -92,6 +96,22 @@
     top: 50%;
     margin-top: -400rpx;
     height: 800rpx;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -350rpx;
+      margin-top: -350rpx;
+      width: 700rpx;
+      height: 700rpx;
+      background: url('https://img.war6sky.com/2024/09/f61ea6fc5fe842eb824e74eb1e7153c7.png') no-repeat center center;
+      background-size: 100% 100%;
+      animation: lightRotate 8s linear infinite;
+      margin-bottom: 200rpx;
+      z-index: -1;
+    }
   }
 }
 

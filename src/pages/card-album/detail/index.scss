@@ -1,0 +1,132 @@
+/* pages/card-album/detail/index.wxss */
+@import '../../../variables.scss';
+
+page {
+  @include flexColumn;
+  width: 100vw;
+  height: 100vh;
+  color: #615F5F;
+  position: relative;
+}
+
+.album-detail {
+  flex: 1;
+  width: 750rpx;
+  background: #F7F8FA;
+  color: #615F5F;
+  box-sizing: border-box;
+  padding-top: 62rpx;
+
+  view {
+    box-sizing: border-box;   
+  }
+
+  .top-wrap {
+    width: 680rpx;
+    margin: 0 auto;
+    padding-bottom: 28rpx;
+    @include flexColumn;
+    align-items: flex-start;
+    border-bottom: 2rpx #ECECEC solid;
+  }
+
+  .base-wrap {
+    width: 100%;
+    @include flexRow;
+    align-items: flex-start;
+  }
+
+  .card-img {
+    box-shadow: 0 2rpx 18rpx -10rpx rgba(0,0,0,0.50);
+    border-radius: 6rpx;
+    width: 180rpx;
+    height: 246rpx;
+    margin-right: 44rpx;
+  }
+
+  .title-wrap {
+    padding-top: 54rpx;
+    flex: 1;
+    @include flexColumn;
+    align-items: flex-start;
+  }
+
+  .card-title {
+    font-size: 38rpx;
+    line-height: 52rpx;
+    color: #282727;
+    margin-bottom: 18rpx;
+  }
+
+  .interactive-count {
+    font-size: 22rpx;
+    line-height: 30rpx;
+    color: #615F5F;
+  }
+
+  .ip-wrap {
+    background: #566169;
+    border-radius: 10rpx;
+    height: 48rpx;
+    padding: 0 20rpx 0 34rpx;
+    margin-top: 32rpx;
+    @include flexRow;
+    font-size: 28rpx;
+    line-height: 38rpx;
+    color: #FFFFFF;
+
+    image {
+      width: 26rpx;
+      height: 26rpx;
+      margin-right: 15rpx;
+    }
+
+    &::after {
+      content: '';
+      width: 19rpx;
+      height: 22rpx;
+      background: url('https://img.war6sky.com/2024/09/c51c51da946a43e9ba4812ebd92fcdf3.png') no-repeat center center;
+      background-size: 100% 100%;
+      transform: rotate(180deg);
+      margin-left: 30rpx;
+      visibility: hidden;
+      width: 0;
+    }
+  }
+
+  .extra-wrap {
+    margin: 38rpx auto 0;
+    background: #FFFFFF;
+    border-radius: 8rpx;
+    width: 680rpx;
+    padding: 26rpx 64rpx 66rpx;
+    @include flexColumn;
+    align-items: flex-start;
+  }
+
+  .extra-title {
+    font-size: 32rpx;
+    line-height: 44rpx;
+    color: #615F5F;
+    transform: translateX(-4rpx);
+  }
+
+  .extra-item {
+    margin-top: 32rpx;
+    @include flexRow;
+  }
+
+  .extra-label {
+    width: 136rpx;
+    font-size: 26rpx;
+    line-height: 48rpx;
+    color: #615F5F;
+  }
+
+  .extra-value {
+    font-size: 32rpx;
+    line-height: 48rpx;
+    color: #615F5F;
+    font-weight: bold;
+  }
+}

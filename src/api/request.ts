@@ -15,7 +15,8 @@ export default function request<T = any>(params: {
         method: params.method || 'GET',
         data: params.data || {},
         header: {
-          'Authorization': wx.getStorageSync('Authorization')
+          'Authorization': wx.getStorageSync('Authorization'),
+          'Accept-Language': 'zh-CN',
         },
         success(res: any) {
           if (res.statusCode === 200) {
@@ -23,6 +24,8 @@ export default function request<T = any>(params: {
           } else if (res.statusCode === 401 && !config?.ignore401) {
             userApi.login().then(() => {
               requestCb();
+            }).catch(e => {
+              reject(e);
             })
           } else {
             reject(res);

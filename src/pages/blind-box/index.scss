@@ -17,9 +17,9 @@ page {
 .blind-box {
   width: 100vw;
   flex: 1;
-  background: url('https://img.war6sky.com/2024/08/484c759308534067b2adcadce7dd2994.jpeg') no-repeat center top;
+  background: url('https://img.war6sky.com/2024/09/676fe8205b784517aa066d59746bbec1.jpeg') no-repeat center top;
   background-size: 750rpx 1624rpx;
-  padding-top: 194rpx;
+  padding-top: 160rpx;
   @include flexColumn;
 
   image {
@@ -121,11 +121,11 @@ page {
     backface-visibility: hidden;
 
     &.active {
-      animation: rotateCard 10s infinite ease-in-out;
+      animation: floatUpDown 4s infinite alternate ease-in-out;
     }
 
     &::after {
-      content: '';
+      // content: '';
       height: 616rpx;
       width: 396rpx;
       background: url('https://img.war6sky.com/2024/08/bb29e30e7ff1406cb44c77200b70fd0a.png') no-repeat center center;
@@ -294,7 +294,7 @@ page {
 
   .extra-btn-wrap {
     position: absolute;
-    right: 0;
+    right: -2rpx;
     top: 462rpx;
     @include flexColumn;
 
@@ -339,14 +339,11 @@ page {
   }
 }
 
-@keyframes rotateCard {
-  0%, 50%, 100% {  
-    transform: rotateY(0deg) rotateX(0deg);
-  }
-  75% {
-    transform: rotateY(-20deg) rotateX(2deg);
-  }
-  90% {
-    transform: rotateY(10deg) rotateX(-2deg);
-  }
+@keyframes floatUpDown {  
+  0%, 100% {  
+    transform: translateY(0) translateZ(16rpx);
+  }  
+  50% {  
+    transform: translateY(-16rpx) translateZ(0);
+  }  
 }

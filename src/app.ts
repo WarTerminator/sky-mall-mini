@@ -13,16 +13,24 @@ App<IAppOption>({
     addressSelected: null,
     config: {
       editorWebUrl: ''
+    },
+    publishStepForm: {},
+    navBar: {
+      statusBarHeight: 0,
+      navBarHeight: 0,
+      windowHeight: 0,
+      scrollViewHeight: 0,
     }
   },
   onLaunch() {
     this.getUserInfo();
     this.getGlobalConfigAsync();
+    this.getBarHeight();
   },
   onShow(params) {
     this.globalData.scene = params?.scene || 1000;
   },
-   // 触发页面回调以更新数据
+  // 触发页面回调以更新数据
   triggerUpdate () {
     const pages = getCurrentPages();
     pages.forEach(page => {
@@ -42,4 +50,21 @@ App<IAppOption>({
       this.triggerUpdate();
     });
   },
+  getBarHeight () {
+    const rect = wx.getMenuButtonBoundingClientRect()
+    wx.getSystemInfo({
+      success: ({
+        statusBarHeight,
+        windowHeight,
+      }) => {
+        const navBarHeight = rect.bottom + rect.top - statusBarHeight;
+        this.globalData.navBar = {
+          statusBarHeight,
+          navBarHeight,
+          windowHeight,
+          scrollViewHeight: windowHeight - navBarHeight
+        };
+      }
+    })
+  }
 })

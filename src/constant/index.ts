@@ -3,6 +3,7 @@ export enum ProdType {
 }
 
 export const officialShopLogo = '2023/10/d46062511b2a425b8464a39480ec57fa.png';
+export const LOGO = 'https://img.war6sky.com/2024/08/6b6917c097764d1282b593e813e9e453.png';
 
 
 export enum TermType {

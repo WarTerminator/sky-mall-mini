@@ -17,3 +17,11 @@ const formatNumber = (n: number) => {
   const s = n.toString()
   return s[1] ? s : '0' + s
 }
+
+export const getMyElement = (selector: string):Promise<any> => {
+  return new Promise((resolve, reject) => {
+    const query = wx.createSelectorQuery();
+    query.select(selector).boundingClientRect();
+    query.exec((res) => resolve(res[0]));
+  });
+}

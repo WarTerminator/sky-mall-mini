@@ -1,9 +1,4 @@
-<view
-  class="scrollarea"
-  scroll-y
-  show-scrollbar="{{false}}"
-  type="custom"
->
+<view class="wrapper">
   <view class="bg">
     <view class="bg-wrapper">
       <image src="{{IMG_PRE + 'user-bg.png'}}" mode="widthFix" />
@@ -49,4 +44,5 @@
       </view>
     </view>
   </view>
+  <view class="tabBarBlock"></view>
 </view>

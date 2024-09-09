@@ -3,6 +3,7 @@ import {
   userApi,
 } from '../../api/index';
 import { VIPConfigMap } from '../../constant/index';
+import { getMyElement } from '../../utils/util';
 
 Page<any, any>({
   data: {
@@ -42,19 +43,29 @@ Page<any, any>({
       }
     ],
     intoView: '',
-    tabSelected: 0
+    tabSelected: 0,
+    params: {},
+    navBar: {},
+    actionHeight: 65
   },
   onLoad(params: any) {
     const app = getApp();
     const userInfo = app.globalData.userInfo;
     this.setData({
+      navBar: app.globalData.navBar,
       userInfo,
+      params,
       prodId: params.prodId,
       isShared: app.globalData?.scene == 1007 || app.globalData?.scene == 1008,
-      vipOption: userInfo?.levelType == 1 ? VIPConfigMap[userInfo?.userLevel.termType || 0] : {}
+      vipOption: userInfo?.levelType == 1 ? VIPConfigMap[userInfo?.userLevel.termType || 0] : {},
+    });
+    getMyElement('#J_Action').then(res => {
+      this.setData({
+        actionHeight: res.height
+      });
     });
     // 商品详情
-    mallApi.goodsInfo(+(params?.prodId || 0)).then((data => {
+    mallApi.goodsScoreInfo(+(params?.prodId || 0)).then((data => {
       const skuIms = data?.skuList.filter((i: any, index: number) => {
         i.index = index;
         return i.pic;
@@ -131,6 +142,13 @@ Page<any, any>({
   },
   // skuPop确认
   handleEnsure () {
+    if (!this.data.currentSkuItem.stocks) {
+      return wx.showToast({
+        title: '库存不足',
+        icon: 'error',
+        duration: 2000
+      })
+    }
     if (!this.data.currentSkuItem?.skuId) {
       return wx.showToast({
         title: '请选择规格',
@@ -146,7 +164,7 @@ Page<any, any>({
     };
     if (this.data.isDesign) {
       wx.navigateTo({
-        url: '../design/index'
+        url: '../design/editor'
       });
     } else {
       wx.navigateTo({
@@ -204,9 +222,17 @@ Page<any, any>({
   },
   // 切换sku
   handleSelectSku (e: any) {
-    this.setData({
+    const targetSkuItem = e.currentTarget.dataset.item;
+    if (!targetSkuItem.stocks) {
+      return wx.showToast({
+        title: '库存不足',
+        icon: 'error',
+        duration: 2000
+      })
+    }
+    return this.setData({
       currentCount: 1,
-      currentSkuItem: e.currentTarget.dataset.item,
+      currentSkuItem: targetSkuItem,
     })
   },
   // 数量减一

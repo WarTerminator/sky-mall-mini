@@ -4,7 +4,7 @@
       <block wx:if="{{back}}">
         <view class="weui-navigation-bar__buttons">
           <view bindtap="back" class="weui-navigation-bar__btn_goback_wrapper" hover-class="weui-active" aria-role="button" aria-label="返回">
-            <view class="weui-navigation-bar__button {{isShared ? 'weui-navigation-bar__btn_home' : 'weui-navigation-bar__btn_goback'}}"></view>
+            <view class="weui-navigation-bar__button {{isShared ? 'weui-navigation-bar__btn_home' : 'weui-navigation-bar__btn_goback'}} {{color === '#FFFFFF' ? 'weui-navigation-bar__white' : ''}}"></view>
           </view>
         </view>
       </block>

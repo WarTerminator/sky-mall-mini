@@ -2,11 +2,14 @@
 
 Component({
   properties: {
-    count: {
-      type: Number,
+    assetIds: {
+      type: Array,
     },
     blindBox: {
       type: Object,
+    },
+    isTrial: {
+      type: Boolean,
     },
   },
   data: {

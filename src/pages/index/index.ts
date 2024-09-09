@@ -8,11 +8,10 @@ import {
 } from '../../constant/host';
 import {
   officialShopLogo,
+  LOGO
 } from '../../constant/index';
 
 const systemInfo = wx.getSystemInfoSync()
-
-const { shared } = wx.worklet
 
 const lerp = (begin: number, end: number, t: number) => {
   'worklet'
@@ -44,14 +43,21 @@ Page<any, any>({
     entrances: [],
     categoryCurrent: '',
     categorySet: [],
-    categoryItemWidth: 0,
     intoView: '',
     userInfo: null,
     init: true,
+    navBarOpacity: 0,
+    navBar: {
+      scrollViewHeight: 0
+    },
+    LOGO,
+    scrollTop: null,
+    categoryWrapTop: '',
+    fixTab: false,
   },
   onShow() {
-    if (typeof this.getTabBar === 'function' ) {
-      this.getTabBar((tabBar:any) => {
+    if (typeof this.getTabBar === 'function') {
+      this.getTabBar((tabBar: any) => {
         tabBar.setData({
           selected: 0
         })
@@ -59,34 +65,29 @@ Page<any, any>({
     }
   },
   onLoad() {
-    const app = getApp();
-    this.navBarOpacity = shared(0)
-    // const padding = 10 * 2
+    let query = wx.createSelectorQuery();
+    query.select('#categoryWrap').boundingClientRect((rect) => {
+      this.setData({
+        categoryWrapTop: rect.top
+      })
+    }).exec();
     this.setData({
-      // categoryItemWidth: (systemInfo.windowWidth - padding) / 5,
-      userInfo: app.globalData.userInfo
+      paddingHeight: wx.getMenuButtonBoundingClientRect().top,
     })
-
-    // 导航头透明度
-    this.applyAnimatedStyle('.nav-bar', () => {
-      'worklet'
-      return {
-        background: `rgba(255, 255, 255, ${this.navBarOpacity.value})`,
-      }
+    const app = getApp();
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      navBar: app.globalData.navBar
     });
     // 首页配置
     commonApi.platformConfig('MINI_HOME').then((data) => {
       this.setData({
         banners: data.banners || [],
-        hots: (data.hots || []).slice(0,5) || [],
+        hots: (data.hots || []).slice(0, 5) || [],
         entrances: data.entrances || [],
         categorySet: [{
           page: 0,
-          categorys: data.categories.slice(0,8) || []
-        },
-        {
-          page: 1,
-          categorys: data.categories.slice(8,16) || []
+          categorys: data.categories.slice(0, 5) || []
         }]
       });
     });
@@ -99,12 +100,14 @@ Page<any, any>({
       this.getFeeds();
     }
   },
-  getFeeds () {
+  
+  getFeeds() {
     return mallApi.goodsFeeds({
       sort: 1,
       categoryId: this.data.categoryCurrent || '',
       current: this.data.pageIndex,
       size: 20,
+      hasStock: true,
     }).then((result) => {
       const isEnd = result.pages == this.data.pageIndex;
       this.setData({
@@ -129,30 +132,33 @@ Page<any, any>({
   },
   // 滚动导航渐现
   handleScrollUpdate(evt: any) {
-    'worklet'
     const maxDistance = 60
     const scrollTop = clamp(evt.detail.scrollTop, 0, maxDistance)
-    const progress = scrollTop / maxDistance
-    this.navBarOpacity.value = lerp(0, 1, progress)
+    const progress = scrollTop / maxDistance;
+    this.setData({
+      navBarOpacity: lerp(0, 1, progress),
+      scrollTop: evt.detail.scrollTop,
+      fixTab: evt.detail.scrollTop > this.data.categoryWrapTop - this.data.navBar.navBarHeight
+    });
   },
-  handleCategory(e:any) {
+  handleCategory(e: any) {
     const item = e.currentTarget.dataset.item;
     // wx.navigateTo({
     //   url: `../category/index?id=${item.id}`
     // })
-    // this.setData({
-    //   pageIndex: 1,
-    //   categoryCurrent: item.id,
-    // })
-    // this.getFeeds();
+    this.setData({
+      pageIndex: 1,
+      categoryCurrent: item.id,
+    })
+    this.getFeeds();
   },
-  handleHot (e:any) {
+  handleHot(e: any) {
     const item = e.currentTarget.dataset.item;
     wx.navigateTo({
       url: `../product/index?prodId=${item.id}`
     })
   },
-  handleEntry (e:any) {
+  handleEntry(e: any) {
     const item = e.currentTarget.dataset.item;
 
     if (item.navigate) {
@@ -165,7 +171,7 @@ Page<any, any>({
       url: `../${item.page}/index`
     })
   },
-  handleDebug () {
+  handleDebug() {
     wx.navigateTo({
       url: '../debug/index'
     })

@@ -6,13 +6,14 @@ page {
   width: 100vw;
   height: 100vh;
   color: #333333;
-  position: relative; 
+  position: relative;
 }
 
 .storage-locker {
   background: #F7F8FA;
   flex: 1;
   width: 100%;
+  height: 0;
   @include flexColumn;
   position: relative;
 
@@ -29,7 +30,7 @@ page {
     font-size: 22rpx;
     line-height: 36rpx;
     color: #B3B3B3;
-    
+
     .text {
       color: #707070;
       margin-left: 30rpx;
@@ -43,13 +44,20 @@ page {
   }
 
   .sort-wrap {
-    box-sizing: border-box;
     padding-top: 24rpx;
     width: 100%;
     height: 118rpx;
   }
 
+  .sort-list {
+    height:94rpx;
+    @include flexRow;
+    flex-wrap: nowrap;
+    padding-left: 35rpx;
+  }
+
   .sort-item {
+    flex: 0 0 auto;
     // background: #228AFF;
     background: #A5A5A5;
     border-radius: 12rpx;
@@ -60,10 +68,6 @@ page {
     height: 62rpx;
     @include flexRowCenter;
     margin-right: 14rpx;
-
-    &:first-child{
-      margin-left: 35rpx;
-    }
   }
 
   .storage-summary {
@@ -94,13 +98,39 @@ page {
     }
   }
 
+  .empty-wrap {
+    flex: 1;
+    width: 100%;
+    @include flexColumnCenter;
+    font-size: 28rpx;
+    line-height: 36rpx;
+    color: #707070;
+
+    image {
+      width: 242rpx;
+      height: 242rpx;
+      margin-bottom: 40rpx;
+    }
+  }
+
   .scroll-wrap {
     flex: 1;
     width: 100%;
+    height: 0;
+  }
+
+  .sroll-end {
+    width: 100%;
+    font-size: 24rpx;
+    line-height: 28rpx;
+    color: #848484;
+    text-align: center;
+    padding-bottom: 20rpx;
   }
 
   .card-list {
     width: 100%;
+    min-height: 100%;
     padding-top: 15rpx;
     padding-bottom: 30rpx;
     padding-left: 35rpx;
@@ -116,17 +146,26 @@ page {
       position: relative;
       transition: all 0.2s;
 
-      &.selected::after {
-        content: '';
-        position: absolute;
-        left: -9rpx;
-        right: -9rpx;
-        top: -14rpx;
-        bottom: 19rpx;
-        box-sizing: border-box;
-        border: 3rpx solid #4DAAFF;
-        border-radius: 12rpx;
+      &.selected {
+        &::after {
+          content: '';
+          position: absolute;
+          left: -9rpx;
+          right: -9rpx;
+          top: -14rpx;
+          bottom: 19rpx;
+          box-sizing: border-box;
+          border: 3rpx solid #4DAAFF;
+          border-radius: 12rpx;
+        }
+
+        .selected-circle {
+          border: none;
+          background: url('https://img.war6sky.com/2024/08/e3492d1f489843cb914a66a412a5d8d8.png') no-repeat center center;
+          background-size: 100% 100%;
+        }
       }
+
 
       &.small {
         width: 116rpx;
@@ -149,7 +188,7 @@ page {
           display: none;
         }
 
-        .selected-icon, .unselected-circle {
+        .selected-circle {
           top: 126rpx;
           right: 5rpx;
           width: 28rpx;
@@ -158,11 +197,21 @@ page {
       }
     }
 
+    .selected-circle {
+      position: absolute;
+      top: 250rpx;
+      right: 10rpx;
+      width: 34rpx;
+      height: 34rpx;
+      border: 2rpx solid #999898;
+      border-radius: 100%;
+    }
+
     .card-img {
       width: 210rpx;
       height: 290rpx;
       border-radius: 6rpx;
-      box-shadow: 0 2rpx 18rpx -10rpx rgba(0,0,0,0.50);
+      box-shadow: 0 2rpx 18rpx -10rpx rgba(0, 0, 0, 0.50);
       border-radius: 6rpx;
     }
 
@@ -173,6 +222,9 @@ page {
       line-height: 30rpx;
       color: #2B2B2B;
       margin-top: 20rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .card-code {
@@ -183,19 +235,6 @@ page {
       color: #848484;
       margin-top: 9rpx;
     }
-
-    .selected-icon, .unselected-circle {
-      position: absolute;
-      top: 240rpx;
-      right: 10rpx;
-      width: 40rpx;
-      height: 40rpx;
-    }
-
-    .unselected-circle {
-      border-radius: 100%;
-      border: 2rpx solid #999898;
-    }
   }
 
   .bottom-wrap {
@@ -204,12 +243,12 @@ page {
     background: #FFFFFF;
     position: relative;
     padding: 0 40rpx 32rpx;
-    @include flexRowBetween;
+    @include flexRow;
 
     &::before {
       content: '';
       opacity: 0.16;
-      background-image: linear-gradient(0deg, #000000 0%, rgba(255,255,255,0.00) 99%);
+      background-image: linear-gradient(0deg, #000000 0%, rgba(255, 255, 255, 0.00) 99%);
       width: 750rpx;
       height: 30rpx;
       position: absolute;
@@ -243,6 +282,15 @@ page {
       }
     }
 
+    .tip-wrap {
+      flex: 1;
+      font-size: 24rpx;
+      line-height: 32rpx;
+      color: #4B4B4B;
+      padding-top: 36rpx;
+      margin-left: 15rpx;
+    }
+
     .action-btn {
       @include flexRowCenter;
       background-image: linear-gradient(-61deg, #18DEFC 0%, #004FE6 100%);
@@ -269,6 +317,63 @@ page {
     image {
       width: 100%;
       height: 100%;
+    }
+  }
+}
+
+.confirm-order, .rule-page {
+  width: 100%;
+  height: 100%;
+  background: #F1F1F1;
+  border-radius: 20rpx 20rpx 0 0;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.rule-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title-wrap {
+    @include flexRow;
+    width: 100%;
+    height: 104rpx;
+    font-size: 34rpx;
+    line-height: 48rpx;
+    color: #272727;
+    flex: 0 0 auto;
+    position: relative;
+    padding-left: 40rpx;
+    box-sizing: border-box;
+
+    .close-btn {
+      width: 50rpx;
+      height: 50rpx;
+      background: url('https://img.war6sky.com/2024/08/1b4dd2d7d4584f9b823eee9ac6828bca.png') no-repeat center center;
+      background-size: 25rpx 24rpx;
+      position: absolute;
+      right: 28rpx;
+      top: 28rpx;
+    }
+  }
+
+  .content-wrap {
+    background: #FFFFFF;
+    box-shadow: 0 2rpx 18rpx -10rpx rgba(0,0,0,0.50);
+    border-radius: 20rpx;
+    width: 680rpx;
+    height: 85%;
+    padding: 30rpx 0;
+    box-sizing: border-box;
+    font-size: 24rpx;
+    line-height: 34rpx;
+    color: #B1B1B1;
+
+    .rich-text-wrap {
+      padding: 0 28rpx;
     }
   }
 }

@@ -3,6 +3,9 @@ import blindBoxService from "../../../../api/blind-box";
 import { tryJsonParse } from "../../../../utils/index";
 import animationAdapter from "../../../../utils/animationAdapter";
 import { ICustomProperty, IData, IMethods } from "./interface";
+import WXToast from "../../../../utils/WXToast";
+
+const TRIAL_SRG_KEY = 'trial-unbox-count';
 
 const WHOLE_PACK_IMG = 'https://img.war6sky.com/2024/08/0780bc644f8c48eb899c7600fff1b70a.png';
 const RIPPED_PART_IMG = 'https://img.war6sky.com/2024/08/82cf56b82a974a22a2de2a789be8cf3c.png';
@@ -19,17 +22,21 @@ const OFFSET_MAP = [
 
 Component<IData, any, IMethods, ICustomProperty, false>({
   properties: {
-    count: {
-      type: Number,
+    assetIds: {
+      type: Array,
     },
     blindBox: {
       type: Object,
     },
+    isTrial: {
+      type: Boolean,
+    }
   },
   data: {
     show: true,
     width: 750,
     height: 1624,
+    unboxing: false,
   },
   lifetimes: {
     attached: function () {
@@ -81,6 +88,15 @@ Component<IData, any, IMethods, ICustomProperty, false>({
             });
           }
         });
+
+        // 虚线
+        ctx.strokeStyle = '#CFCFCF';
+        ctx.setLineDash([20, 12]);
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(this._originX - 40, this._originY + 50);
+        ctx.lineTo(this._originX + renderWidth + 40, this._originY + 50);
+        ctx.stroke();
       });
     },
     _loadImg(key, url) {
@@ -242,13 +258,36 @@ Component<IData, any, IMethods, ICustomProperty, false>({
 
       return animationAdapter(canvas.requestAnimationFrame, 400, fadeout);
     },
+    _addTrialCount() {
+      const date = new Date().toLocaleDateString();
+      const srgKey = `${TRIAL_SRG_KEY}-${date}`;
+      let count = Number(wx.getStorageSync(srgKey) || 0);
+      count += 1;
+      wx.setStorageSync(srgKey, count);
+    },
     // 激活拆包
     async _executeDrawRequest() {
       try {
-        const res = await blindBoxService.executeDraw({
-          count: this.properties.count,
-          gameItemId: this.properties.blindBox.gameItemId,
-        });
+        let res = [];
+
+        if (this.properties.isTrial) {
+          res = await blindBoxService.executeTrialDraw({
+            assetId: this.properties.blindBox.gameItemId,
+          });
+
+          this._addTrialCount();
+        } else {
+          res = await blindBoxService.executeDraw({
+            userAssetId: this.properties.assetIds,
+            assetId: this.properties.blindBox.gameItemId,
+          });
+        }
+
+        if (!res.length) {
+          throw {
+            data: '抽卡结果异常',
+          }
+        }
 
         const cards = res.reduce((acc: any[], item: any) => {
           const records = (item.records || []).map((record: any) => {
@@ -270,21 +309,25 @@ Component<IData, any, IMethods, ICustomProperty, false>({
     },
     async handleActiveUnbox() {
       if (this._unboxing) return;
+      
+      this._unboxing = true;
 
       try {
         const cards = await this._executeDrawRequest();
         this.triggerEvent('success', { cards });
-      } catch(error) {
+      } catch(e) {
+        this._unboxing = false;
+        
+        await WXToast(e?.data);
         this.triggerEvent('error');
-        wx.showToast({
-          title: '网络错误',
-          icon: 'error',
-        });
         
         return;
       }
+
+      this.setData({
+        unboxing: true,
+      });
       
-      this._unboxing = true;
       await this._handleUnbox();
       this.triggerEvent('unboxed');
 
@@ -293,6 +336,38 @@ Component<IData, any, IMethods, ICustomProperty, false>({
         show: false,
       });
       this._unboxing = false;
+    },
+    onTouchStart(event) {
+      if (this._unboxing) return;
+
+      const touch = event.touches?.[0] || {};
+      const x = (touch.x || 0) * 2;
+      const y = (touch.y || 0) * 2;
+
+      if (y > this._originY && y < this._originY + 200) {
+        this._swiping = true;
+        this._swipeX = x;
+      }
+    },
+    onTouchMove(event) {
+      if (this._unboxing || !this._swiping) return;
+
+      const touch = event.touches?.[0] || {};
+      const x = (touch.x || 0) * 2;
+
+      if (x > this._swipeX + 150) {
+        this._swiping = false;
+        this._swipeX = undefined;
+        this._swiped = true;
+      }
+    },
+    onTouchEnd() {
+      if (this._unboxing) return;
+
+      if (this._swiped) {
+        this._swiped = false;
+        this.handleActiveUnbox();
+      }
     }
   }
 })

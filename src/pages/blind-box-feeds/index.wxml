@@ -12,13 +12,19 @@
   </view>
 </view>
 <!-- refresher-default-style="white" -->
+<view wx:if="{{loading || !blindBoxList.length}}" class="empty-wrap">
+  <image src="https://img.war6sky.com/2024/09/ea102f999a944f989f5c7035e11544b9.png" />
+  <text>{{loading ? '加载中...' : '空空如也～'}}</text>
+</view>
 <scroll-view
+  wx:else
   class="blind-box-feeds"
   type="custom"
   scroll-y
   refresher-enabled
   refresher-triggered="{{refresherTriggered}}"
   bindrefresherrefresh="onRefresherRefresh"
+  bind:scrolltolower="handleLoadMore"
 >
   <view class="blind-box-list">
     <view
@@ -65,6 +71,7 @@
     </view>
   </view>
 </scroll-view>
+<view wx:if="{{validAsset.length}}" class="valid-asset-icon" bind:tap="handleDealAsset"></view>
 
 <wxs module="func">
   module.exports = {

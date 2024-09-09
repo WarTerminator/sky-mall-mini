@@ -30,6 +30,14 @@
       right: 28rpx;
       top: 28rpx;
     }
+
+    .album-enter {
+      width: 152rpx;
+      height: 50rpx;
+      background: url('https://img.war6sky.com/2024/09/43f1ce62b22c4dfbb782275f10187b3a.png') no-repeat center center;
+      background-size: 100% 100%;
+      margin-left: 14rpx;
+    }
   }
 
   .top-tip {
@@ -86,7 +94,7 @@
       font-size: 30rpx;
       line-height: 36rpx;
       color: #090909;
-      padding-right: 20rpx;
+      padding-right: 30rpx;
       @include flexRow;
 
       &::before {

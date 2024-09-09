@@ -1,4 +1,4 @@
-<swiper class="margin-swiper {{autoSwiper ? 'auto' : ''}}" previous-margin="50px" next-margin="50px" bind:change="onSwiperChange" bind:animationfinish="onSwiperFinish" bind:animationend="onAnimationEnd" current="{{current}}">
+<swiper class="margin-swiper {{autoSwipe ? 'auto' : ''}}" previous-margin="50px" next-margin="50px" bind:change="onSwiperChange" bind:animationfinish="onSwiperFinish" bind:animationend="onAnimationEnd" current="{{current}}">
   <swiper-item wx:for="{{items}}" wx:key="value" class="{{func.indexClass(index, current)}}">
     <view class="swiper-item {{func.indexClass(index, current)}}" data-index="{{index}}" bind:tap="handleChangeCurrent">
       <flip-card flip="{{item.flip}}" bind:flipEnd="onFlipEnd">

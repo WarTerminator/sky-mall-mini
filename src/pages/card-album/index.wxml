@@ -1,0 +1,70 @@
+<!--pages/card-album/index.wxml-->
+<navigation-bar back="{{true}}" background="transparent" class="navigation-bar" color="#FFFFFF" />
+<view class="card-album">
+  <view class="top-wrap" style="background-image: url({{packetBgImg}});">
+    <view class="logo-wrap">
+      <image src="https://img.war6sky.com/2024/08/874e279d7f5d4853a3cdd059e1e8ecf7.png" mode="aspectFit" />
+    </view>
+    <view class="title-wrap">{{packetName}}</view>
+    <view class="progress-wrap">
+      <image src="https://img.war6sky.com/2024/07/57464ec483004a1fad0e177ce08cfa0c.png" mode="aspectFill" />
+      <view class="progress-info">
+        <view class="progress-count">我拥有 {{ownedCount}}/{{cards.length}} 款</view>
+        <view class="progress-line">
+          <view class="progress-inner" style="width: {{func.getProgress(cards,ownedCount)}};"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="body-wrap">
+    <view class="tab-wrap">
+      <view wx:for="{{tabs}}" wx:key="key" class="tab-item {{activeTab === item.key ? 'active' : ''}}" data-key="{{item.key}}" bind:tap="handleChangeTab">{{item.label}}</view>
+    </view>
+    <scroll-view class="scroll-wrap" scroll-y show-scrollbar="{{false}}">
+      <view wx:if="{{loading || !func.cardsFilter(cards, activeTab).length}}" class="empty-wrap">
+        <image src="https://img.war6sky.com/2024/09/ea102f999a944f989f5c7035e11544b9.png" />
+        <text>{{loading ? '加载中...' : '空空如也～'}}</text>
+      </view>
+      <view wx:else class="card-list">
+        <view wx:for="{{func.cardsFilter(cards, activeTab)}}" wx:key="userAssetId" class="card-item" data-item="{{item}}" bind:tap="jumpToDetail">
+          <image class="card-img" src="{{'https://objects.buff-box.com/' + item.bag_pic}}" lazy-load="true" mode="aspectFit" bind:load="onImgLoad" bind:error="onImgError"></image>
+          <text class="card-name">{{item.show_name}}</text>
+          <text class="card-code">{{item.detail.assetNumber}}</text>
+          <view class="owned-btn {{item.owned ? 'owned' : ''}}"></view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<wxs module="func">
+  module.exports = {
+    cardsFilter: function (cards, activeTab) {
+      var cards = cards || [];
+
+      if (activeTab === 'owned') {
+        return cards.filter(function(item) {
+          return item.owned;
+        });
+      }
+
+      if (activeTab === 'unowned') {
+        return cards.filter(function(item) {
+          return !item.owned;
+        });
+      }
+
+      return cards;
+    },
+    getProgress: function (cards, ownedCount) {
+      var cards = cards || [];
+      var ownedCount = ownedCount || 0;
+      
+      if (!cards.length) {
+        return 0;
+      } else {
+        return ((ownedCount / cards.length) * 100).toFixed(0) + '%';
+      }
+    },
+  };
+</wxs>

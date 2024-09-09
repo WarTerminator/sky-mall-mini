@@ -11,7 +11,7 @@ page {
 .scrollarea {
   padding-left: 20rpx;
   height: 100vh;
-  @include flexColumnCenter;
+  @include flexColumnStart;
 }
 .scroll-bottom {
   width: 100%;
@@ -178,5 +178,5 @@ page {
   font-weight: 500;
   @include flexRowCenter;
   color: #FFFFFF;
-  background: linear-gradient(97deg, #1D212A 39%, #195890 100%);
+  background: #2C3344;
 }

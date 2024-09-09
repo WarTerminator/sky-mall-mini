@@ -1,9 +1,9 @@
 @import '../../variables.scss';
 .goods {
-  width: 345rpx;
   background-color: #FFF;
   border-radius: 12rpx;
   overflow: hidden;
+  @include flexColumnStart;
 }
 :host {
   display: block;
@@ -13,15 +13,27 @@
 }
 
 .goods-title {
-  width: 100%;
-  line-height: 1.4;
   margin: 16rpx 0 6rpx;
-  padding: 0 10rpx;
+  width: 90%;
   font-size: 28rpx;
+  &-tag {
+    display: inline-block;
+    margin-right: 4rpx;
+    position: relative;
+    bottom: 6rpx;
+    padding: 0 4rpx;
+    height: 24rpx;
+    line-height: 24rpx;
+    text-align: center;
+    font-size: 18rpx;
+    color: #0399FF;
+    border-radius: 6rpx;
+    border: 1rpx solid #0399FF;
+  }
 }
 
 .goods-info {
-  padding-left: 10rpx;
+  width: 90%;
   padding-bottom: 20rpx;
   .goods-info-price {
     font-size: 40rpx;
@@ -29,7 +41,9 @@
     color: #000000;
     @include flexRowStart;
     &::before {
-      align-self: flex-end;
+      position: relative;
+      top: 2rpx;
+      margin-right: 4rpx;
       content: '¥';
       font-size: 24rpx;
       font-weight: 600;
@@ -51,7 +65,18 @@
     }
   }
 }
+.goods-group {
+  margin-top: 38rpx;
+  font-size: 18rpx;
+  color: #828282;
+  @include flexRowStart;
+  &-left {
+    margin-right: 24rpx;
+  }
+  &-right {
 
+  }
+}
 .empty {
   margin: 20rpx 99rpx 0;
   @include bgImg(552, 257, 'empty.png');

@@ -10,11 +10,19 @@ interface IAppOption {
     config: {
       editorWebUrl: string,
     };
+    publishStepForm: any;
+    navBar: {
+      statusBarHeight: number,
+      navBarHeight: number,
+      windowHeight: number,
+      scrollViewHeight: number,
+    },
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
   triggerUpdate: Function,
   getUserInfo: Function,
   getGlobalConfigAsync: Function,
+  getBarHeight: Function
 }
 
 interface Area {

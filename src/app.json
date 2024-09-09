@@ -3,60 +3,58 @@
     "pages/index/index",
     "pages/product/index",
     "pages/group/index",
+    "pages/group/publishStep0/index",
+    "pages/group/publishStep1/index",
     "pages/design/index",
+    "pages/design/editor",
     "pages/message/index",
-    "pages/shopCar/index",
     "pages/pay/index",
+    "pages/pay/result",
     "pages/blind-box-feeds/index",
     "pages/blind-box/index",
     "pages/my/index",
-    "pages/userInfo/index",
-    "pages/addressAdd/index",
+    "pages/my/userInfo",
     "pages/address/index",
+    "pages/address/update",
     "pages/login/index",
-    "pages/orderList/index",
-    "pages/orderInfo/index",
-    "pages/payResult/index",
+    "pages/order/index",
+    "pages/order/detail",
     "pages/storage-locker/index",
-    "pages/submit-dispatch/index",
     "pages/debug/index",
-    "pages/customized/index"
+    "pages/card-album/index",
+    "pages/card-album/detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "disableScroll": true,
+    "navigationStyle": "custom"
   },
   "tabBar": {
-    "custom": true,
+    "custom": false,
     "color": "#9B9DB1",
     "selectedColor": "#000000",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "list": [
+     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/group/index",
-        "text": "创意"
-      },
-      {
-        "pagePath": "pages/customized/index",
-        "text": "定制"
-      },
-      {
-        "pagePath": "pages/message/index",
-        "text": "消息"
+        "iconPath": "/images/home1.png",
+        "selectedIconPath": "/images/home.png",
+        "text": "商城",
+        "iconSize": 20
       },
       {
         "pagePath": "pages/my/index",
-        "text": "我的"
+        "iconPath": "/images/my1.png",
+        "selectedIconPath": "/images/my.png",
+        "text": "我的",
+        "iconSize": 20
       }
     ]
   },
   "style": "v2",
-  "renderer": "skyline",
+  "renderer": "webview",
   "rendererOptions": {
     "skyline": {
       "defaultDisplayBlock": true,

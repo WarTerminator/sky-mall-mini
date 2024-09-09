@@ -2,8 +2,9 @@
 page {
   background: #F1F1F1;
 }
-.scrollarea {
+.wrapper {
   height: 100vh;
+  overflow-y: scroll;
 }
 .bg {
   position: relative;
@@ -62,7 +63,7 @@ page {
         width: 174rpx;
         height: 174rpx;
         border-radius: 174rpx;
-        border: 8rpx solid #EEF4F4;
+        border: 8rpx solid #F1F1F1;
         overflow: hidden;
         @include flexRowCenter;
         box-sizing: border-box;
@@ -188,4 +189,7 @@ page {
       width: 24rpx;
     }
   }
+}
+.tabBarBlock {
+  padding-top: 40rpx;
 }

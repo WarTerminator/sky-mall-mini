@@ -4,14 +4,9 @@
     <text>商品详情</text>
     <view class="close-btn" bind:tap="handleClose"></view>
   </view>
-  <scroll-view scroll-y class="content-wrap">
-    <view class="sub-title">购买说明</view>
-    <view>R卡盒SR卡为随机发，需要准确卡位的话可后台备注</view>
-    <view class="sub-title">配置说明</view>
-    <view>
-      本商品为提前拆袋确认商品。
-      1、主卡组是作为对战时候使用的；副卡组是两场之间如果觉得主卡组对对手还不够强，就可以与主卡组的某些卡片做一对一的交换，以达到对付不同类型的对手的最佳状态。
-      2、限制卡、准限制卡和禁止卡：卡组的组合要遵循这些规律。限制是每个卡组（包括副卡组）只能放1张的卡；准限制卡是每组只能放2张的卡；禁止卡是不能在正式的OCG比赛中使用的卡。另外，不在此范围内的卡，同一种卡在卡组里不能超过3张。以下是限制卡、准限制卡和禁止卡的目录。
+  <scroll-view scroll-y class="content-wrap" show-scrollbar="{{false}}">
+    <view class="rich-text-wrap">
+      <rich-text nodes="{{blindBox.content}}"></rich-text>
     </view>
   </scroll-view>
 </view>

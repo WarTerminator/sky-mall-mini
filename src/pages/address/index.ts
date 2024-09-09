@@ -32,7 +32,7 @@ Page({
       })
     }
     return wx.navigateTo({
-      url: '../addressAdd/index'
+      url: '../address/update'
     })
   },
   // radio
@@ -73,7 +73,7 @@ Page({
   handleEdit (e:any) {
     const item = e.currentTarget.dataset.item;
     wx.navigateTo({
-      url: `../addressAdd/index?item=${encodeURIComponent(JSON.stringify(item))}`
+      url: `../address/update?item=${encodeURIComponent(JSON.stringify(item))}`
     })
   }
 })

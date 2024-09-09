@@ -1,0 +1,34 @@
+<!--pages/card-album/detail/index.wxml-->
+<navigation-bar back="{{true}}" title="卡片详情" class="navigation-bar" />
+<view class="album-detail">
+  <view class="top-wrap">
+    <view class="base-wrap">
+      <image src="https://objects.buff-box.com/2024/08/9b2bfee64b334c6a944b5368e5310627.png" mode="aspectFit" class="card-img"></image>
+      <view class="title-wrap">
+        <view class="card-title">潮宠-13</view>
+        <view class="interactive-count">
+          807浏览 · 21想要 · 135拥有
+        </view>
+      </view>
+    </view>
+    <view class="ip-wrap">
+      <image src="https://img.war6sky.com/2024/08/874e279d7f5d4853a3cdd059e1e8ecf7.png" mode="aspectFit" />
+      <text>KPL</text>
+    </view>
+  </view>
+  <view class="extra-wrap">
+    <view class="extra-title">资料</view>
+    <view class="extra-item">
+      <view class="extra-label">编号</view>
+      <view class="extra-value">CC-13</view>
+    </view>
+    <view class="extra-item">
+      <view class="extra-label">稀有度</view>
+      <view class="extra-value">R</view>
+    </view>
+    <view class="extra-item">
+      <view class="extra-label">IP</view>
+      <view class="extra-value">KPL</view>
+    </view>
+  </view>
+</view>

@@ -4,7 +4,10 @@ Component({
   properties: {
     cards: {
       type: Array,
-    }
+    },
+    isTrial: {
+      type: Boolean,
+    },
   },
   data: {
     _takingBack: false,
@@ -70,8 +73,18 @@ Component({
         this.setData({ cards });
         this.animate(`.card-wrap-${index}`, [
           { translate: item.translate, scale: [1, 1] },
-          { translate: [0, 0], scale: [2, 2], ease: 'ease' }
+          // { translate: [0, 0], scale: [1.8, 1.8], ease: 'ease', offset: 0.6},
+          // { translate: [0, 0], scale: [2.4, 2.4], ease: 'ease-in-out', offset: 0.8},
+          { translate: [0, 0], scale: [1.9, 1.9], ease: 'ease', offset: 0.9},
+          { translate: [0, 0], scale: [2.2, 2.2], ease: 'ease-in-out', offset: 0.96},
+          { translate: [0, 0], scale: [2, 2], ease: 'ease-in-out' },
         ], 400);
+
+        setTimeout(() => {
+          this.setData({
+            showLight: true,
+          });
+        }, 300);
       }
     },
     // 卡片结束翻转
@@ -95,6 +108,10 @@ Component({
       const index = cards.findIndex(item => item.overview);
 
       if (index < 0 || this.data._takingBack) return;
+
+      this.setData({
+        showLight: false,
+      });
 
       const item = this.data.cards[index];
       this.data._takingBack = true;

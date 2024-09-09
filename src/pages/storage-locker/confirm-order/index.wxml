@@ -1,0 +1,57 @@
+<!--pages/storage-locker/confirm-order/index.wxml-->
+<view class="confirm-order">
+  <view class="title-wrap">
+    <text>确认发货</text>
+    <view class="close-btn" bind:tap="handleClose"></view>
+  </view>
+  <view class="order-wrap">
+    <view class="order-info">
+      <view class="img-wrap">
+        <image src="{{'https://objects.buff-box.com/' + orderParams.firstPic}}" mode="aspectFit"></image>
+        <view wx:if="{{orderParams.userAssetIds.length}}" class="asset-count">{{orderParams.userAssetIds.length}}</view>
+      </view>
+      <view class="item-wrap">
+        <view class="item-name">{{orderParams.assetName}}</view>
+        <view class="item-count">
+          已选<text>x{{orderParams.userAssetIds.length || '--'}}</text>张
+        </view>
+        <view class="item-desc">预计出货日期：2024.08.30，具体发货时间以实际制作为准</view>
+      </view>
+    </view>
+    <view class="discount-item">
+      <view class="label">优惠券</view>
+      <view class="value">暂无可用</view>
+    </view>
+    <view class="discount-item">
+      <view class="label">不凡能量</view>
+      <view class="value">暂无可用</view>
+    </view>
+    <view class="amount-wrap">
+      <view class="label">共计：</view>
+      <view class="value">
+        <text class="unit">￥</text>
+        <text class="amount">{{!!orderData.totalCount ? orderData.actualTotal : '--'}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="address-wrap" bindtap="handleSelectAddress">
+    <block wx:if="{{selectedAddress.addrId}}">
+      <view class="address-top-wrap">
+        <text wx:if="{{selectedAddress.commonAddr == 1}}" class="default-tag">默认</text>
+        <text class="receiver-name">{{selectedAddress.receiver}}</text>
+        <text class="receiver-phone">{{selectedAddress.mobile}}</text>
+      </view>
+      <view class="address-info">
+        {{selectedAddress.province}}{{selectedAddress.city}}{{selectedAddress.area}}{{selectedAddress.addr}}
+      </view>
+      <view class="arrow-icon"></view>
+    </block>
+    <view wx:else class="address-empty">添加地址</view>
+    <view class="decorate-line"></view>
+  </view>
+  <view class="blink"></view>
+  <view class="btn-wrap">
+    <text>确认上述信息并支付</text>
+    <view class="action-btn {{(!selectedAddress.addrId || !orderData) ? 'disable' : ''}}" hover-class="active" bind:tap="handleSubmit">确认</view>
+  </view>
+</view>

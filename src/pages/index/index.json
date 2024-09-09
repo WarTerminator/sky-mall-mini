@@ -2,7 +2,5 @@
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
     "goods-card": "/components/goods-card/index"
-  },
-  "disableScroll": true,
-  "navigationStyle": "custom"
+  }
 }

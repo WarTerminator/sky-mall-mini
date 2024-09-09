@@ -4,7 +4,7 @@
     <text>卡包订单确认</text>
     <view class="close-btn" bind:tap="handleClose"></view>
   </view>
-  <scroll-view class="scroll-wrap" scroll-y>
+  <scroll-view class="scroll-wrap" scroll-y show-scrollbar="{{false}}">
     <view class="order-wrap">
       <view class="order-info">
         <view class="img-wrap">
@@ -34,7 +34,7 @@
         <view class="label">共计：</view>
         <view class="value">
           <text class="unit">￥</text>
-          <text class="amount">{{blindBox.price * count}}</text>
+          <text class="amount">{{orderData.actualTotal}}</text>
         </view>
       </view>
     </view>
@@ -54,6 +54,6 @@
   </scroll-view>
   <view class="btn-wrap">
     <text>确认上述信息并支付</text>
-    <view class="action-btn {{!agreed ? 'disable' : ''}}" hover-class="active" bind:tap="handleSubmit">确认</view>
+    <view class="action-btn {{(!agreed || !orderData) ? 'disable' : ''}}" hover-class="active" bind:tap="handleSubmit">确认</view>
   </view>
 </view>

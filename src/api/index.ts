@@ -167,6 +167,7 @@ export const mallApi = {
     // orderBy: number,
     current?: number,
     size?: number,
+    hasStock?: boolean,
   }) {
     return request({
       url: '/search/page',
@@ -176,6 +177,11 @@ export const mallApi = {
   goodsInfo (prodId: number) {
     return request({
       url: `/prod/prodInfo?prodId=${prodId}`
+    })
+  },
+  goodsScoreInfo (prodId: number) {
+    return request({
+      url: `/p/score/prod/prodInfo?prodId=${prodId}`
     })
   },
   confirm (data: any, isScoreType?: boolean) {
@@ -190,6 +196,12 @@ export const mallApi = {
       method: 'POST',
       url: `/p/${isScoreType ? 'score':'order'}/submit`,
       data
+    })
+  },
+  cancel (orderNumber: string) {
+    return request({
+      method: 'PUT',
+      url: `/p/myOrder/cancel/${orderNumber}`,
     })
   },
   pay(data: {
@@ -226,3 +238,52 @@ export const mallApi = {
     })
   }
 };
+
+export const groupApi = {
+  createActivity (data : {
+    cgpActivity: {
+      activityName: string,
+      rotateImgs: string,
+      content: string,
+      media: string,
+      startTime: string,
+      endTime: string,
+      ipId: number, // 类别
+      targetAmount: number,
+      shopId: number,
+    },
+    groupProd: {
+      groupSkuList: Array<{
+        actPrice: 0,
+				skuId: number,
+				limitNum: number,
+				// "leaderPrice": 0,
+				// "price": 0,
+				// "sellNum": 0,
+				// "stocks": 0
+      }>,
+      shopId: number,
+      prodId: number,
+    }
+  }) {
+    return request<any>({
+      method: 'POST',
+      url: '/p/cgp/activity',
+      data,
+    })
+  },
+  enableSkuList () {
+    return request<any>({
+      url: '/cgp/sku/enableSkuList',
+    })
+  },
+  activityPage (data: {
+    current: number,
+    size: number,
+  }) {
+    return request<any>({
+      url: '/p/cgp/activity/page',
+      data,
+    })
+  }
+}

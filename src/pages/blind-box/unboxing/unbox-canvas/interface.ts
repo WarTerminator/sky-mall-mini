@@ -2,6 +2,7 @@ export type IData = {
   show: boolean;
   width: number;
   height: number;
+  unboxing: boolean;
 }
  
 export type IMethods = {
@@ -11,8 +12,12 @@ export type IMethods = {
   _drawCardImg(index?: number, offsetY?: number): void;
   _handleUnbox(): Promise<any>;
   _handleFadeout(): Promise<any>;
+  _addTrialCount(): void;
   _executeDrawRequest(): Promise<any>;
   handleActiveUnbox(): Promise<any>;
+  onTouchStart(event: WechatMiniprogram.TouchCanvas): void;
+  onTouchMove(event: WechatMiniprogram.TouchCanvas): void;
+  onTouchEnd(event: WechatMiniprogram.TouchCanvas): void;
 }
 
 interface IBaseImg {

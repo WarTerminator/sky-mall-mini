@@ -3,21 +3,36 @@
   "projectname": "small-card-mini",
   "setting": {
     "compileHotReLoad": true,
-    "skylineRenderEnable": true
+    "skylineRenderEnable": false,
+    "urlCheck": false
   },
   "condition": {
     "miniprogram": {
       "list": [
         {
-          "name": "抽卡机",
-          "pathName": "pages/blind-box-feeds/index",
+          "name": "图鉴",
+          "pathName": "pages/card-album/index",
+          "query": "gameItemId=5",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "订单",
+          "pathName": "pages/order/index",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "暂存柜",
-          "pathName": "pages/submit-dispatch/index",
+          "pathName": "pages/storage-locker/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "抽卡机",
+          "pathName": "pages/blind-box-feeds/index",
           "query": "",
           "launchMode": "default",
           "scene": null

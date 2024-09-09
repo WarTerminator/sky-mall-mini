@@ -19,11 +19,11 @@
       </flip-card>
     </view>
   </view>
-  <view wx:if="{{func.getSomeOverview(cards)}}" class="overview-mask" bind:tap="handleTakeBackCard"></view>
+  <view wx:if="{{func.getSomeOverview(cards)}}" class="overview-mask {{showLight ? 'light' : ''}}" bind:tap="handleTakeBackCard"></view>
   <view wx:if="{{func.getAllInPosition(cards)}}" class="btn-wrap">
     <block wx:if="{{func.getAllFlipped(cards)}}">
-      <view class="close-btn" bind:tap="handleClose">继续抽卡</view>
-      <view class="jump-btn" bind:tap="jumpToStorageLocker">去发货</view>
+      <view wx:if="{{!isTrial}}" class="jump-btn" bind:tap="jumpToStorageLocker">去发货</view>
+      <view class="close-btn" bind:tap="handleClose">再抽一次</view>
     </block>
     <view wx:else class="flip-btn" bind:tap="handleFlipCard">点击翻卡</view>
   </view>

@@ -4,6 +4,9 @@ Component({
     cards: {
       type: Array,
     },
+    isTrial: {
+      type: Boolean,
+    },
   },
   data: {
     showFlipSwiper: false,

@@ -1,26 +1,24 @@
-<navigation-bar class="nav-bar" title="" back="{{false}}">
-  <view class="nav-left" slot="left">
-    <view class="nav-title">
-      <text class="nav-title-logo" />
-      <text class="nav-title-search" bindtap="handleDebug" />
+<navigation-bar class="nav-bar" title="" back="{{false}}" background="rgba(255,255,255,{{navBarOpacity}})">
+  <view class="nav-left" slot="center">
+    <view class="nav-title" style='opacity: {{navBarOpacity}}'>
+       Movenova
     </view>
   </view>
 </navigation-bar>
-<text class="top-bg" />
 <scroll-view
   class="scroll-area"
   type="custom"
   scroll-y
   show-scrollbar="{{false}}"
-  worklet:onscrollupdate="handleScrollUpdate"
+  bindscroll="handleScrollUpdate"
   bindscrolltolower="handleScrollEnd"
+  style="height:{{navBar.scrollViewHeight}}px"
 >
-  <!-- 空元素头部占位 -->
-  <view class="fake-nav-bar" />
+  <image src="{{LOGO}}" class="logo"></image>
   <view class="banners">
     <swiper
       autoplay="{{true}}"
-      indicator-dots="{{true}}"
+      indicator-dots="{{banners.length > 1}}"
       indicator-color="rgba(255, 255, 255, .6)"
       indicator-active-color="#fff"
       class="banners-swiper"
@@ -36,15 +34,18 @@
       </swiper-item>
     </swiper>
   </view>
-  <!-- 类目 -->
-  <view class="category-wrp-content">
+
+    <!-- 类目 -->
+  <view
+    class="category-wrp-content {{fixTab && 'fix-tab'}}"
+    id="categoryWrap"
+    style="top: {{navBar.navBarHeight}}px">
     <swiper class="category-wrp">
       <block wx:for="{{categorySet}}" wx:key="page">
         <swiper-item>
           <view class="category-list">
             <block wx:for="{{item.categorys}}" wx:key="id" wx:for-item="category">
-              <view class="category-item" data-item="{{category}}" bindtap="handleCategory">
-                <image mode="heightFix" class="category-icon" src="{{category.icon}}" />
+              <view class="category-item {{categoryCurrent === category.id && 'active'}}" data-item="{{category}}" bindtap="handleCategory">
                 <view class="category-name">
                   <text>{{category.name}}</text>
                 </view>
@@ -54,24 +55,6 @@
         </swiper-item>
       </block>
     </swiper>
-  </view>
-  <!-- 热门 -->
-  <view class="hot-content">
-    <view class="hot-content-entry">
-      <image
-        wx:for="{{entrances}}"
-        wx:key="index"
-        src="{{item.img}}"
-        data-item="{{item}}"
-        bindtap="handleEntry"
-      />
-    </view>
-    <view class="hot-content-recommend">
-      <view class="recommend-title"></view>
-      <view class="recommend-items">
-        <image mode="widthFix" wx:for="{{hots}}" wx:key="index" src="{{item.img}}" data-item="{{item}}" bindtap="handleHot" />
-      </view>
-    </view>
   </view>
   <!-- feeds流 -->
   <grid-view
@@ -85,5 +68,5 @@
       <goods-card item="{{item}}"></goods-card>
     </block>
   </grid-view>
-  <view class="{{!goods.length && !init ? 'empty' : 'block'}}"></view>
+  <!-- <view class="{{!goods.length && !init ? 'empty' : 'tabBarBlock'}}"></view> -->
 </scroll-view>

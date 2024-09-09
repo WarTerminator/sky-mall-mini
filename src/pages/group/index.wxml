@@ -1,4 +1,69 @@
-<navigation-bar title="拼团" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<view class="page-camp">
-  <text>拼团/众筹</text>
-</view>
+<navigation-bar title="创意开团" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view
+  class="scroll-area"
+  type="custom"
+  scroll-y
+  show-scrollbar="{{false}}"
+  bindscrolltolower="handleScrollEnd"
+  style="height:{{navBar.scrollViewHeight}}px"
+>
+  <view >
+    <view class="banners">
+      <swiper
+        autoplay="{{true}}"
+        indicator-dots="{{true}}"
+        indicator-color="rgba(255, 255, 255, .6)"
+        indicator-active-color="#fff"
+        class="banners-swiper"
+      >
+        <swiper-item
+          class="banners-swiper-item"
+          wx:for="{{banners}}"
+          wx:key="index"
+          data-item="{{item}}"
+          bindtap="handleHot"
+        >
+          <image mode="widthFix" src="{{item.img}}" />
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="recommend">
+      <view class="recommend-title">编辑推荐</view>
+      <view class="recommend-items">
+        <view class="recommend-item" wx:for="{{hots}}" wx:key="index">
+          <image src="{{item.img}}" />
+        </view>
+      </view>
+    </view>
+    <view class="category">
+      <scroll-view
+        class="tab-list"
+        scroll-x
+        type="list"
+        show-scrollbar="{{false}}"
+        enable-flex
+        scroll-with-animation
+        scroll-into-view="{{intoView}}"
+        scroll-into-view-alignment="center"
+      >
+        <block wx:for="{{tabs}}" wx:key="id">
+          <view class="tab-item" id="tab-{{index}}">
+            <text class="tab-name {{tabSelected === index ? 'selected' : ''}}" data-id="{{index}}" bindtap="handleTab">{{item.name}}</text>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <grid-view
+      padding="{{[6, 6, 6, 6]}}"
+      cross-axis-gap="6"
+      main-axis-gap="10"
+      cross-axis-count="2"
+      type="masonry"
+    >
+      <block wx:for="{{goods}}" wx:key="index">
+        <goods-card item="{{item}}" type="group"></goods-card>
+      </block>
+    </grid-view>
+    <view class="{{!goods.length && !init ? 'empty' : 'tabBarBlock'}}"></view>
+  </view>
+</scroll-view>

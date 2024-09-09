@@ -43,6 +43,9 @@ Component<{
     blindBox: {
       type: Object,
     },
+    isTrial: {
+      type: Boolean,
+    },
   },
   data: {
     showPopKey: '',
@@ -56,8 +59,8 @@ Component<{
       this.handleShowPop('confirmPay', { totalPrice, count });
     },
     onPaySuccess(event) {
-      const count = event?.detail?.count;
-      this.handleShowPop('unboxing', { count: count });
+      const assetIds = event?.detail?.assetIds;
+      this.handleShowPop('unboxing', { assetIds });
     },
     handleClose() {
       this.setData({

@@ -38,6 +38,10 @@
 
 .weui-navigation-bar__inner .weui-navigation-bar__left .weui-navigation-bar__btn_goback, .weui-navigation-bar__btn_home {
   @include bgImg(44, 38, 'back.png');
+
+  &.weui-navigation-bar__white {
+    background-image: url(https://img.war6sky.com/2024/09/c51c51da946a43e9ba4812ebd92fcdf3.png);
+  }
 }
 .weui-navigation-bar__btn_home {
   // @include bgImg(28, 26, 'home.png');

@@ -4,7 +4,7 @@
   这个页面仍就采用了 webview 的渲染引擎
   需要注意下有些在 skyline 默认就支持的能力，在这里需要手动开启
 -->
-<navigation-bar class="navigation-bar" title="抽卡机" back="{{true}}" background="transparent" color="#fff" />
+<navigation-bar class="navigation-bar" title="抽卡机" back="{{true}}" background="transparent" color="#FFFFFF" />
 <view class="blind-box">
   <view class="logo-wrap">
     <image wx:if="{{blindBoxList[swiperIndex].ipInfo.pic}}" src="{{'https://objects.buff-box.com/' + blindBoxList[swiperIndex].ipInfo.pic}}" mode="aspectFit" />

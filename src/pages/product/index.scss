@@ -26,7 +26,7 @@ page {
   border-radius: 58rpx;
 }
 .scroll-area {
-  height: 100vh;
+  // height: 100vh;
 }
 
 .product-pic-section {
@@ -256,7 +256,6 @@ page {
 }
 
 .product-imgs {
-  margin-bottom: 266rpx;
   width: 100%;
   @include flexColumnCenter;
   align-items: center;
@@ -297,7 +296,6 @@ page {
   .product-sku-content {
     padding-left: 30rpx;
     position: absolute;
-    bottom: 145rpx;
     width: 100%;
     max-height: 1000rpx;
     background: #fff;
@@ -366,12 +364,13 @@ page {
         color: #A2A2A2;
       }
       &-items {
+        width: 90%;
         padding-left: -23rpx;
         flex-wrap: wrap;
         @include flexRowStart;
       }
       &-item, &-item-active {
-        margin-left: 23rpx;
+        margin-right: 23rpx;
         margin-bottom: 12rpx;
         padding: 0 20rpx;
         min-width: 106rpx;
@@ -397,7 +396,8 @@ page {
       }
     }
     .sku-count {
-      margin-top: 45rpx;
+      margin-top: 25rpx;
+      padding-bottom: 14rpx;
       &-box {
         padding: 0 33rpx;
         width: 260rpx;
@@ -443,11 +443,12 @@ page {
 }
 .product-action {
   position: absolute;
-  left: 0rpx;
-  bottom: 1rpx;
+  bottom: 0rpx;
   padding: 0 20rpx;
+  padding-top: 20rpx;
+  min-height: 130rpx;
+  padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
-  height: 145rpx;
   opacity: 1;
   background: #fff;
   @include flexRowBetween;
@@ -467,7 +468,7 @@ page {
     height: 98rpx;
     font-size: 40rpx;
     color: #FFFFFF;
-    background: linear-gradient(98deg, #1D212A 10%, #195890 100%);
+    background: #2C3344;
     border-radius: 98rpx;
     @include flexRowCenter;
     .product-btn-left {
@@ -498,7 +499,9 @@ page {
 }
 .product-action-block {
   width: 100%;
-  height: 60rpx;
+  height: 110rpx;
+  padding-top: 20rpx;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 .product-pic-preview {
   position: fixed;
