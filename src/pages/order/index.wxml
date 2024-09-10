@@ -2,7 +2,7 @@
 <view class="scrollX" scroll-x type="list" show-scrollbar="{{false}}">
   <view class="tab {{currentTabStatus == item.status ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="index" data-status="{{item.status}}" bindtap="handleTab">{{item.label}}</view>
 </view>
-<scroll-view class="scrollY" scroll-y type="list" bindscrolltolower="handleScrollEnd" style="height:{{navBar.scrollViewHeight-53}}px">
+<scroll-view class="scrollY" scroll-y type="list" bindscrolltolower="handleScrollEnd" style="height:{{navBar.scrollViewHeight}}px">
   <view wx:if="{{orderList.length}}" class="card" wx:for="{{orderList}}" wx:key="index" data-item="{{item}}" bindtap="handleToDetail">
     <view class="card-number">
       <view class="card-number-order">订单编号  {{item.orderNumber}}</view>
