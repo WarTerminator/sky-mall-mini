@@ -17,6 +17,7 @@ interface IAppOption {
       windowHeight: number,
       scrollViewHeight: number,
     },
+    categoryCurrent: string;
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
   triggerUpdate: Function,

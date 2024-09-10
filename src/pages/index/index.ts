@@ -25,6 +25,7 @@ const clamp = (cur: number, lowerBound: number, upperBound: number) => {
   return cur
 }
 
+const app = getApp();
 /*
   Document
   - https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html
@@ -41,7 +42,8 @@ Page<any, any>({
     banners: [],
     hots: [],
     entrances: [],
-    categoryCurrent: '',
+    // // categoryCurrent: '2147',
+    // categoryCurrent: '388',
     categorySet: [],
     intoView: '',
     userInfo: null,
@@ -65,16 +67,16 @@ Page<any, any>({
     }
   },
   onLoad() {
-    let query = wx.createSelectorQuery();
-    query.select('#categoryWrap').boundingClientRect((rect) => {
-      this.setData({
-        categoryWrapTop: rect.top
-      })
-    }).exec();
+    // let query = wx.createSelectorQuery();
+    // query.select('#categoryWrap').boundingClientRect((rect) => {
+    //   this.setData({
+    //     categoryWrapTop: rect.top
+    //   })
+    // }).exec();
     this.setData({
       paddingHeight: wx.getMenuButtonBoundingClientRect().top,
     })
-    const app = getApp();
+    
     this.setData({
       userInfo: app.globalData.userInfo,
       navBar: app.globalData.navBar
@@ -102,9 +104,9 @@ Page<any, any>({
   },
   
   getFeeds() {
-    return mallApi.goodsFeeds({
+    return mallApi.goodsFeedsScore({
       sort: 1,
-      categoryId: this.data.categoryCurrent || '',
+      categoryId: app.globalData.categoryCurrent || '',
       current: this.data.pageIndex,
       size: 20,
       hasStock: true,
@@ -138,20 +140,20 @@ Page<any, any>({
     this.setData({
       navBarOpacity: lerp(0, 1, progress),
       scrollTop: evt.detail.scrollTop,
-      fixTab: evt.detail.scrollTop > this.data.categoryWrapTop - this.data.navBar.navBarHeight
+      // fixTab: evt.detail.scrollTop > this.data.categoryWrapTop - this.data.navBar.navBarHeight
     });
   },
-  handleCategory(e: any) {
-    const item = e.currentTarget.dataset.item;
-    // wx.navigateTo({
-    //   url: `../category/index?id=${item.id}`
-    // })
-    this.setData({
-      pageIndex: 1,
-      categoryCurrent: item.id,
-    })
-    this.getFeeds();
-  },
+  // handleCategory(e: any) {
+  //   const item = e.currentTarget.dataset.item;
+  //   // wx.navigateTo({
+  //   //   url: `../category/index?id=${item.id}`
+  //   // })
+  //   this.setData({
+  //     pageIndex: 1,
+  //     categoryCurrent: item.id,
+  //   })
+  //   this.getFeeds();
+  // },
   handleHot(e: any) {
     const item = e.currentTarget.dataset.item;
     wx.navigateTo({

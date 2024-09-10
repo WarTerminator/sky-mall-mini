@@ -1,36 +1,22 @@
 <view class="wrapper">
   <view class="bg">
     <view class="bg-wrapper">
-      <image src="{{IMG_PRE + 'user-bg.png'}}" mode="widthFix" />
+      <image src="https://img.war6sky.com/2024/09/0fe713787a2e42e0b2f47fe1372b0c7e.jpg" mode="widthFix" />
     </view>
     <view class="info">
-      <view class="info-wrapper" bindtap="handleEditUserInfo">
-        <view class="info-edit"></view>
+      <view class="info-wrapper">
         <view class="avatar-wrapper">
-          <image src="{{userInfo.avatar}}" />
+          <open-data type="userAvatarUrl"></open-data>
         </view>
       </view>
       <view class="info-text">
         <view class="info-text-name">
-          <text class="info-text-nickname">{{userInfo.nickName}}</text>
-          <text wx:if="{{userInfo.sex}}" class="name-sex{{userInfo.sex == '1' ? '-girl' : '-boy'}}"></text>
+          <open-data type="userNickName"></open-data>
         </view>
-        <text class="info-text-id">{{userInfo.mobile}}</text>
       </view>
     </view>
   </view>
   <view class="content">
-    <view class="account">
-      <view
-        wx:for="{{account}}"
-        wx:key="index"
-        class="account-item"
-      >
-        <view class="account-label">{{item.label}}</view>
-        <view class="account-number">{{item.value}}</view>
-        <!-- <view class="account-">1</view> -->
-      </view>
-    </view>
     <view class="entries">
       <view
         wx:for="{{entries}}"

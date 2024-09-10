@@ -1,56 +1,24 @@
 import { IMG_PRE } from '../../constant/host';
+const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
 
 Page<any,any>({
   data: {
     IMG_PRE,
-    account: [
-      {
-        label: '会员',
-        value: 'Lv1',
-      },
-      {
-        label: '能量值',
-        value: '*',
-      },
-      {
-        label: '钱包',
-        value: '*',
-      },
-    ],
     entries: [
       {
         label: '我的订单',
         icon: 'order',
-        path: '../order/index'
+        path: '/pages/order/index'
       },
-      // {
-      //   label: '我的收藏',
-      //   icon: 'collection'
-      // },
-      // {
-      //   label: '兑换中心',
-      //   icon: 'exchange'
-      // },
-      // {
-      //   label: '我的集册',
-      //   icon: 'books'
-      // },
       {
         label: '地址管理',
         icon: 'location',
-        path: '../address/index'
-      }
+        path: '/pages/address/index'
+      },
     ],
     userInfo: {},
-  },
-  onShow() {
-    if (typeof this.getTabBar === 'function' ) {
-      this.getTabBar((tabBar:any) => {
-        tabBar.setData({
-          selected: 4
-        })
-      })
-    }
+    myInfo: {},
+    avatarUrl: defaultAvatarUrl,
   },
   onLoad() {
     const { userInfo } = getApp().globalData;
@@ -71,6 +39,12 @@ Page<any,any>({
         },
       ]
     });
+  },
+  onChooseAvatar(e: any) {
+    const { avatarUrl } = e.detail 
+    this.setData({
+      avatarUrl,
+    })
   },
   onGlobalDataUpdate () {
     const { userInfo } = getApp().globalData;

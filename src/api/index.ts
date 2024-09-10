@@ -14,7 +14,6 @@ export const commonApi = {
 export const userApi = {
   getUserInfo() {
     return Promise.all([
-      // this.scoreInfo({}, { ignore401: true }),
       this.scoreLevel(0, { ignore401: true }),
       this.getBalanceInfo({}, { ignore401: true }),
     ]).then(([scoreLevel, balance ]) => {

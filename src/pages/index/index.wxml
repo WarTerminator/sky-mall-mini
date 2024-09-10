@@ -1,7 +1,7 @@
 <navigation-bar class="nav-bar" title="" back="{{false}}" background="rgba(255,255,255,{{navBarOpacity}})">
   <view class="nav-left" slot="center">
     <view class="nav-title" style='opacity: {{navBarOpacity}}'>
-       Movenova
+      MoN小卡世家
     </view>
   </view>
 </navigation-bar>
@@ -36,7 +36,7 @@
   </view>
 
     <!-- 类目 -->
-  <view
+  <!-- <view
     class="category-wrp-content {{fixTab && 'fix-tab'}}"
     id="categoryWrap"
     style="top: {{navBar.navBarHeight}}px">
@@ -55,7 +55,7 @@
         </swiper-item>
       </block>
     </swiper>
-  </view>
+  </view> -->
   <!-- feeds流 -->
   <grid-view
     padding="{{[6, 6, 6, 6]}}"

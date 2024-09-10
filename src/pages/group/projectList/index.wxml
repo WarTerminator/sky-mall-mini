@@ -37,7 +37,7 @@
       </view>
     </view>
   </view>
-  <!-- <view class="{{!loading && !orderList.length ? 'empty' : 'scroll-bottom'}}"></view> -->
+  <view class="{{!loading && !orderList.length ? 'empty' : 'scroll-bottom'}}"></view>
 </scroll-view>
 
 

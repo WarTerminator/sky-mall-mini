@@ -1,5 +1,6 @@
 import { mallApi } from '../../api/index';
 import { IMG_HOST } from '../../constant/host';
+const app = getApp();
 
 Page<any,any>({
   data: {
@@ -13,9 +14,10 @@ Page<any,any>({
     this.getFeeds();
   },
   getFeeds () {
-    return mallApi.goodsFeeds({
+    return mallApi.goodsFeedsScore({
       sort: 1,
       current: this.data.pageIndex,
+      categoryId: app.globalData.categoryCurrent || '',
       size: 20,
     }).then((result) => {
       const isEnd = result.pages == this.data.pageIndex;
