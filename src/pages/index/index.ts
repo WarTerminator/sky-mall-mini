@@ -67,12 +67,6 @@ Page<any, any>({
     }
   },
   onLoad() {
-    // let query = wx.createSelectorQuery();
-    // query.select('#categoryWrap').boundingClientRect((rect) => {
-    //   this.setData({
-    //     categoryWrapTop: rect.top
-    //   })
-    // }).exec();
     this.setData({
       paddingHeight: wx.getMenuButtonBoundingClientRect().top,
     })
@@ -83,6 +77,7 @@ Page<any, any>({
     });
     // 首页配置
     commonApi.platformConfig('MINI_HOME').then((data) => {
+      app.globalData.categoryCurrent = data.categories?.[0]?.id;
       this.setData({
         banners: data.banners || [],
         hots: (data.hots || []).slice(0, 5) || [],
@@ -92,19 +87,20 @@ Page<any, any>({
           categorys: data.categories.slice(0, 5) || []
         }]
       });
-    });
-    // 首页feeds
-    if (!wx.getStorageSync('Authorization')) {
-      userApi.login().then(() => {
+
+      // 首页feed
+      if (!wx.getStorageSync('Authorization')) {
+        userApi.login().then(() => {
+          this.getFeeds();
+        })
+      } else {
         this.getFeeds();
-      })
-    } else {
-      this.getFeeds();
-    }
+      }
+    });
   },
   
   getFeeds() {
-    return mallApi.goodsFeedsScore({
+    return mallApi.goodsFeeds({
       sort: 1,
       categoryId: app.globalData.categoryCurrent || '',
       current: this.data.pageIndex,
@@ -143,17 +139,6 @@ Page<any, any>({
       // fixTab: evt.detail.scrollTop > this.data.categoryWrapTop - this.data.navBar.navBarHeight
     });
   },
-  // handleCategory(e: any) {
-  //   const item = e.currentTarget.dataset.item;
-  //   // wx.navigateTo({
-  //   //   url: `../category/index?id=${item.id}`
-  //   // })
-  //   this.setData({
-  //     pageIndex: 1,
-  //     categoryCurrent: item.id,
-  //   })
-  //   this.getFeeds();
-  // },
   handleHot(e: any) {
     const item = e.currentTarget.dataset.item;
     wx.navigateTo({

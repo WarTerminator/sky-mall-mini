@@ -53,7 +53,7 @@ Page<any,any>({
     this.getFeeds();
   },
   getFeeds () {
-    return mallApi.goodsFeedsScore({
+    return mallApi.goodsFeeds({
       sort: 1,
       categoryId: app.globalData.categoryCurrent || '',
       current: this.data.pageIndex,

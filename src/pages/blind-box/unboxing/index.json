@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "unbox-canvas": "./unbox-canvas",
-    "unbox-result": "./unbox-result",
-    "unbox-large-result": "./unbox-large-result"
-  }
-}

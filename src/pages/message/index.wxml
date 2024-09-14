@@ -1,4 +1,0 @@
-<navigation-bar title="我的消息" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<view class="page-camp">
-  <text>消息页面</text>
-</view>

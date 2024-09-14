@@ -63,7 +63,6 @@
   </view>
   <view class="product-tip">
     <view class="product-tip-title" bindtap="handleToggleTip">
-      <text class="product-tip-logo"></text>
       <text class="product-tip-text">温馨提示</text>
     </view>
     <view wx:if="{{toggleTip}}" class="product-line"></view>

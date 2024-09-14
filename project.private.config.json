@@ -10,6 +10,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/pay/result",
+          "pathName": "pages/pay/result",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/card-album/index",
+          "pathName": "pages/card-album/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "图鉴",
           "pathName": "pages/card-album/index",
           "query": "gameItemId=5",

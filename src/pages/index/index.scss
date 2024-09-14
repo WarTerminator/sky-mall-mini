@@ -215,3 +215,18 @@ page {
   color: #2c2c2c;
   font-weight: bold;
 }
+
+.empty-wrap {
+  flex: 1;
+  width: 100%;
+  @include flexColumnCenter;
+  font-size: 28rpx;
+  line-height: 36rpx;
+  color: #707070;
+
+  image {
+    width: 242rpx;
+    height: 242rpx;
+    margin-bottom: 40rpx;
+  }
+}

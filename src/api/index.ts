@@ -26,6 +26,7 @@ export const userApi = {
   login () {
     const wxLogin = promisify(wx.login);
     return wxLogin().then((res: {code: string}) => {
+      console.warn(res, '---')
       return request<LoginRes>({
         url: '/social/ma',
         data: res.code,

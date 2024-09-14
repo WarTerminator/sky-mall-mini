@@ -57,6 +57,10 @@
     </swiper>
   </view> -->
   <!-- feeds流 -->
+  <view wx:if="{{!goods.length}}" class="empty-wrap">
+    <image src="https://img.war6sky.com/2024/09/ea102f999a944f989f5c7035e11544b9.png" />
+    <text>空空如也～</text>
+  </view>
   <grid-view
     padding="{{[6, 6, 6, 6]}}"
     cross-axis-gap="6"

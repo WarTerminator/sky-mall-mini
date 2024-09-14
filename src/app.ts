@@ -1,9 +1,4 @@
 import { commonApi, userApi } from "./api/index";
-import {
-  env,
-  Env
-} from './constant/host';
-console.warn(env, '---')
 /*
   Document
   - https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html
@@ -26,7 +21,7 @@ App<IAppOption>({
       windowHeight: 0,
       scrollViewHeight: 0,
     },
-    categoryCurrent: env === Env.DEV ? '388' : '2147',
+    categoryCurrent: '',
   },
   onLaunch() {
     this.getUserInfo();
