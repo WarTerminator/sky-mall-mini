@@ -57,6 +57,18 @@ Page<any, any>({
     categoryWrapTop: '',
     fixTab: false,
   },
+  onShareAppMessage: function () {
+    return {
+      title: '欢迎使用MoV小卡世家', // 分享标题
+      path: '/pages/index/index', // 分享路径，必须是以'/'开头的完整路径
+    };
+  },
+  onShareTimeline: function () {
+    return {
+      title: '欢迎使用MoV小卡世家', // 分享标题
+      query: ''
+    };
+  },
   onShow() {
     if (typeof this.getTabBar === 'function') {
       this.getTabBar((tabBar: any) => {
