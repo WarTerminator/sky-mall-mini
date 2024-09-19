@@ -14,7 +14,6 @@
   bindscrolltolower="handleScrollEnd"
   style="height:{{navBar.scrollViewHeight}}px"
 >
-  <image src="{{LOGO}}" class="logo"></image>
   <view class="banners">
     <swiper
       autoplay="{{true}}"
@@ -30,7 +29,7 @@
         data-item="{{item}}"
         bindtap="handleHot"
       >
-        <image mode="widthFix" src="{{item.img}}" />
+        <image mode="scaleToFill" src="{{item.img}}" class='banner-img'/>
       </swiper-item>
     </swiper>
   </view>

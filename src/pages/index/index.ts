@@ -42,8 +42,6 @@ Page<any, any>({
     banners: [],
     hots: [],
     entrances: [],
-    // // categoryCurrent: '2147',
-    // categoryCurrent: '388',
     categorySet: [],
     intoView: '',
     userInfo: null,
@@ -112,11 +110,11 @@ Page<any, any>({
   },
   
   getFeeds() {
-    return mallApi.goodsFeeds({
+    return mallApi.goodsFeedsScore({
       sort: 1,
       categoryId: app.globalData.categoryCurrent || '',
       current: this.data.pageIndex,
-      size: 20,
+      size: 50,
       hasStock: true,
     }).then((result) => {
       const isEnd = result.pages == this.data.pageIndex;

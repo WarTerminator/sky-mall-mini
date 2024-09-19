@@ -23,7 +23,7 @@
     "navigationStyle": "custom"
   },
   "tabBar": {
-    "custom": false,
+    "custom": true,
     "color": "#9B9DB1",
     "selectedColor": "#000000",
     "borderStyle": "black",

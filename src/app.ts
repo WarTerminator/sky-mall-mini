@@ -22,6 +22,7 @@ App<IAppOption>({
       scrollViewHeight: 0,
     },
     categoryCurrent: '',
+    selected: 0,
   },
   onLaunch() {
     this.getUserInfo();
