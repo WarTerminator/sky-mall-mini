@@ -151,6 +151,7 @@ Page<any, any>({
   },
   handleHot(e: any) {
     const item = e.currentTarget.dataset.item;
+    if (!item?.id) return;
     wx.navigateTo({
       url: `../product/index?prodId=${item.id}`
     })
