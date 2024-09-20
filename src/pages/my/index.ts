@@ -15,6 +15,11 @@ Page<any,any>({
         icon: 'location',
         path: '/pages/address/index'
       },
+      {
+        label: '关于',
+        icon: 'project',
+        path: '/pages/my/about/index'
+      },
     ],
     userInfo: {},
     myInfo: {},

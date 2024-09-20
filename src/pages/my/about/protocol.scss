@@ -1,0 +1,10 @@
+page {
+  // background: #F1F1F1;
+}
+.content {
+  padding: 30rpx 34rpx;
+  overflow-y: scroll;
+
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+}

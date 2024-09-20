@@ -1,0 +1,4 @@
+<navigation-bar title="{{title}}" back="{{true}}" color="black" background="#fff"></navigation-bar>
+<view class="content" style="height:{{navBar.scrollViewHeight}}px">
+  <rich-text nodes="{{content}}"></rich-text>
+</view>

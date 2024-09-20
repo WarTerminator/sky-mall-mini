@@ -1,0 +1,15 @@
+<navigation-bar title="关于" back="{{true}}" color="black" background="#F1F1F1"></navigation-bar>
+<view class="wrapper">
+  <view class="content">
+    <view class="entries">
+      <view
+        wx:for="{{entries}}" wx:key="index"
+        class="entries-item"
+        data-item="{{item}}"
+        bindtap="handleToPath"
+      >
+        <view class="entries-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+</view>

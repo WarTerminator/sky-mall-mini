@@ -9,6 +9,27 @@ export const commonApi = {
       url: `/sys/config/info/${key}`,
     })
   },
+  swiperImgs (imgType: number, shopId: number = 0) {
+    return request({
+      url: `/indexImgs/${shopId || 0}?imgType=${imgType}`,
+    })
+  },
+  listCategory (categoryId: number|string = '') {
+    return request({
+      url: `/category/categoryInfo?parentId=${categoryId}`,
+    })
+  },
+  noticeInfo (id: number) {
+    return request({
+      url: `/shop/notice/info/${id}`,
+    })
+  },
+  // 协议
+  serviceProtocol(key: string) {
+    return request({
+      url: `/sys/config/info/${key}`
+    });
+  },
 };
 
 export const userApi = {
