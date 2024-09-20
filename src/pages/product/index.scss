@@ -1,4 +1,6 @@
 @import '../../variables.scss';
+@import "../../wxParser/index.wxss";
+
 page {
   height: 100%;
   position: relative;
@@ -28,6 +30,7 @@ page {
 .scroll-area {
   // height: 100vh;
 }
+
 
 .product-pic-section {
   position: relative;
@@ -166,11 +169,11 @@ page {
   color: #A2A2A2;
   @include flexRowStart;
   align-items: center;
-  &::before {
-    margin-right: 12rpx;
-    content: '';
-    @include bgImg(26, 23, 'CPFR.png');
-  }
+  // &::before {
+  //   margin-right: 12rpx;
+  //   content: '';
+  //   @include bgImg(26, 23, 'CPFR.png');
+  // }
   &-title {
     margin-right: 22rpx;
   }
@@ -561,5 +564,21 @@ page {
     transform: scale(1.2);
     color: #2c2c2c;
     font-weight: bold;
+  }
+}
+
+.wxParser {
+  width: 710rpx;
+  margin-top: 26rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  .wxParser-p {
+    border-radius: 20rpx;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    .wxParser-img {
+      width: 100%;
+    }
   }
 }

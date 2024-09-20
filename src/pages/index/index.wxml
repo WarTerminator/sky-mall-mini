@@ -18,8 +18,8 @@
     <swiper
       autoplay="{{true}}"
       indicator-dots="{{banners.length > 1}}"
-      indicator-color="rgba(255, 255, 255, .6)"
-      indicator-active-color="#fff"
+      indicator-color="rgba(65, 156, 241, .6)"
+      indicator-active-color="#419CF1"
       class="banners-swiper"
     >
       <swiper-item

@@ -23,6 +23,7 @@ page {
     }
   }
 }
+
 .category-wrp-content {
   margin-bottom: 8rpx;
   &.fix-tab {
@@ -219,4 +220,10 @@ page {
     height: 242rpx;
     margin-bottom: 40rpx;
   }
+}
+
+.wx-swiper-dots .wx-swiper-dot{
+  width: 60rpx;
+  height: 2rpx;
+  border-radius: 2rpx;
 }

@@ -5,6 +5,8 @@ import {
 import { VIPConfigMap } from '../../constant/index';
 import { getMyElement } from '../../utils/util';
 
+const wxParser = require('../../wxParser/index.js');
+
 Page<any, any>({
   data: {
     isShared: false, // 是否分享场景
@@ -46,7 +48,8 @@ Page<any, any>({
     tabSelected: 0,
     params: {},
     navBar: {},
-    actionHeight: 65
+    actionHeight: 65,
+    detailContent: '',
   },
   onLoad(params: any) {
     const app = getApp();
@@ -77,7 +80,19 @@ Page<any, any>({
         goodsInfo: data,
         swiperImgs,
         currentSkuItem: data.skuList?.[0],
-        isDesign: !!data.skuList[0].customCenterSkuEditTempId
+      });
+
+      let that = this;
+      wxParser.parse({
+        bind: 'richText',
+        html: data?.content,
+        target: that,
+        enablePreviewImage: false,
+        tapLink: (url: any) => {
+          wx.navigateTo({
+            url
+          })
+        }
       });
     }));
     // 收藏
