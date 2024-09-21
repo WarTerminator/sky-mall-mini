@@ -109,6 +109,7 @@ page {
 .scroll-area {
   min-height: 100vh;
   padding-bottom: 90px;
+  box-sizing: border-box;
 }
 
 .category-wrp {

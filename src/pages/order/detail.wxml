@@ -81,8 +81,8 @@
 <view wx:if="{{orderInfo.status == 3 || orderInfo.status == 1}}" class="card-state">
   <view class="card-state-order">
     <!-- <view class="card-state-delivered">已收货</view> -->
-    <!-- <view class="card-state-service">申请售后</view>
-    <view class="card-state-logistics">查看物流</view> -->
+    <!-- <view class="card-state-service">申请售后</view> -->
+    <!-- <view class="card-state-logistics">查看物流</view> -->
     <view wx:if="{{orderInfo.status===3}}" class="card-state-delivered" catchtap="handleGot">确认收货</view>
     <block wx:if="{{orderInfo.status===1}}">
       <view class="card-state-service" catchtap="handleCancel">取消</view>

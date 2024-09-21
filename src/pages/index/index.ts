@@ -114,8 +114,7 @@ Page<any, any>({
       sort: 1,
       categoryId: app.globalData.categoryCurrent || '',
       current: this.data.pageIndex,
-      size: 50,
-      hasStock: true,
+      size: 20,
     }).then((result) => {
       const isEnd = result.pages == this.data.pageIndex;
       this.setData({
@@ -175,3 +174,6 @@ Page<any, any>({
     })
   }
 })
+
+
+
