@@ -1,5 +1,4 @@
 @import '../../variables.scss';
-@import "../../wxParser/index.wxss";
 
 page {
   height: 100%;
@@ -567,18 +566,14 @@ page {
   }
 }
 
-.wxParser {
+.product-imgs {
   width: 710rpx;
+  margin: 0 auto;
   margin-top: 26rpx;
   border-radius: 20rpx;
   overflow: hidden;
-  .wxParser-p {
-    border-radius: 20rpx;
-    overflow: hidden;
-    margin: 0;
+
+  rich-text {
     width: 100%;
-    .wxParser-img {
-      width: 100%;
-    }
   }
 }

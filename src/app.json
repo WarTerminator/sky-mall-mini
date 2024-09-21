@@ -13,10 +13,9 @@
     "pages/order/detail",
     "pages/storage-locker/index",
     "pages/debug/index",
-    "pages/card-album/index",
-    "pages/card-album/detail/index",
     "pages/my/about/index",
-    "pages/my/about/protocol"
+    "pages/my/about/protocol",
+    "pages/my/collection/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

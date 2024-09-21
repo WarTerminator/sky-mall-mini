@@ -108,6 +108,15 @@ export const userApi = {
       url: '/p/address/list'
     })
   },
+  collectionProds (data: {
+    current: number,
+    size: number
+  }) {
+    return request({
+      url: '/p/user/collection/prods',
+      data,
+    })
+  },
   setDefaultAddr(id: number) {
     return request({
       method: 'PUT',

@@ -1,4 +1,4 @@
-<import src="../../wxParser/index.wxml"/>
+<!-- <import src="../../wxParser/index.wxml"/> -->
 
 <navigation-bar
   isShared="{{isShared}}"
@@ -57,9 +57,10 @@
   </view>
   
   <view class="product-imgs">
-    <view class="wxParser">
+    <!-- <view class="wxParser">
       <template is="wxParser" data="{{wxParserData:richText.nodes}}"/>
-    </view>
+    </view> -->
+    <rich-text nodes="{{content}}"></rich-text>
   </view>
   <view class="product-action-block"></view>
 </scroll-view>
@@ -114,7 +115,7 @@
   <button wx:if="{{!showSkuPop}}" open-type="share" class="product-share">
     <view class="product-share-icon"></view>
   </button>
-  <view wx:if="{{!showSkuPop}}" class="product-action-btn" bindtap="handleBuy">立即{{isDesign ? '定制' : '购买'}}</view>
+  <view wx:if="{{!showSkuPop}}" class="product-action-btn" bindtap="handleBuy">立即购买</view>
   <view wx:else class="product-action-ensure" bindtap="handleEnsure">
     确认
   </view>

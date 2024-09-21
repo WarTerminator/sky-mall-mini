@@ -1,0 +1,19 @@
+<navigation-bar title="我的收藏" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view
+  class="scrollarea"
+  scroll-y
+  type="custom"
+  bindscrolltolower="handleScrollEnd"
+  style="height:{{navBar.scrollViewHeight}}px"
+>
+  <grid-view
+    padding="{{[6, 6, 6, 6]}}"
+    cross-axis-gap="6"
+    main-axis-gap="6"
+    cross-axis-count="2"
+    type="masonry"
+  >
+    <goods-card wx:for="{{goods}}" wx:key="index" item="{{item}}"></goods-card>
+  </grid-view>
+  <view class="{{!goods.length && !init ? 'empty' : 'scroll-bottom'}}"></view>
+</scroll-view>

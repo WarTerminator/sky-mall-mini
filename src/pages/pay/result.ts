@@ -15,7 +15,7 @@ Page<any,any>({
     this.getFeeds();
   },
   getFeeds () {
-    return mallApi.goodsFeedsScore({
+    return mallApi.goodsFeeds({
       sort: 1,
       current: this.data.pageIndex,
       categoryId: app.globalData.categoryCurrent || '',

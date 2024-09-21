@@ -5,7 +5,29 @@ import {
 import { VIPConfigMap } from '../../constant/index';
 import { getMyElement } from '../../utils/util';
 
-const wxParser = require('../../wxParser/index.js');
+const formatRichText = (html: any) => {
+  let newContent = html.replace(/<img[^>]*>/gi, function(match: any, capture: any) {
+    match = match.replace(/style="[^"]+"/gi, '').replace(/style='[^']+'/gi, '');
+    match = match.replace(/width="[^"]+"/gi, '').replace(/width='[^']+'/gi, '');
+    match = match.replace(/height="[^"]+"/gi, '').replace(/height='[^']+'/gi, '');
+    return match;
+  });
+  newContent = newContent.replace(/style="[^"]+"/gi, function(match: any, capture: any) {
+    match = match
+      .replace(/<p>/gi, '<p class="p_class">')
+      .replace(/width:[^;]+;/gi, 'max-width:100%;')
+      .replace(/width:[^;]+;/gi, 'max-width:100%;');
+    return match;
+  });
+  newContent = newContent.replace(/<br[^>]*\/>/gi, "");
+  newContent = newContent.replace(/<a>/gi, '<a class="p_class "');
+  newContent = newContent.replace(/<li>/gi, '<li class="p_class "');
+  newContent = newContent.replace(/\<p/gi, '<p class="p_class "');
+  newContent = newContent.replace(/\<span/gi, '<span class="p_class "');
+  newContent = newContent.replace(/\<img/gi,
+    '<img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"');
+  return newContent;
+}
 
 Page<any, any>({
   data: {
@@ -32,7 +54,6 @@ Page<any, any>({
       imgs: '',
       video: '',
     },
-    isDesign: false,
     tabs: [
       {
         name: '商品详情'
@@ -44,12 +65,12 @@ Page<any, any>({
         name: '售后详情'
       }
     ],
+    content: '',
     intoView: '',
     tabSelected: 0,
     params: {},
     navBar: {},
     actionHeight: 65,
-    detailContent: '',
   },
   onLoad(params: any) {
     const app = getApp();
@@ -68,7 +89,7 @@ Page<any, any>({
       });
     });
     // 商品详情
-    mallApi.goodsScoreInfo(+(params?.prodId || 0)).then((data => {
+    mallApi.goodsInfo(+(params?.prodId || 0)).then((data => {
       const skuIms = data?.skuList.filter((i: any, index: number) => {
         i.index = index;
         return i.pic;
@@ -80,19 +101,7 @@ Page<any, any>({
         goodsInfo: data,
         swiperImgs,
         currentSkuItem: data.skuList?.[0],
-      });
-
-      let that = this;
-      wxParser.parse({
-        bind: 'richText',
-        html: data?.content,
-        target: that,
-        enablePreviewImage: false,
-        tapLink: (url: any) => {
-          wx.navigateTo({
-            url
-          })
-        }
+        content: formatRichText(data?.content)
       });
     }));
     // 收藏
@@ -177,15 +186,9 @@ Page<any, any>({
       $selectItemCount: this.data.currentCount,
       $selectSkuItem: this.data.currentSkuItem,
     };
-    if (this.data.isDesign) {
-      wx.navigateTo({
-        url: '../design/editor'
-      });
-    } else {
-      wx.navigateTo({
-        url: '/pages/pay/index'
-      });
-    }
+    wx.navigateTo({
+      url: '/pages/pay/index'
+    });
     return this.setData({
       showSkuPop: false,
     })

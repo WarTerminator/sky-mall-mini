@@ -1,0 +1,63 @@
+@import '../../../variables.scss';
+page {
+  background: #F1F1F1;
+}
+.scrollarea {
+  height: 68vh;
+  background: #F6F8F9;
+  border-top-left-radius: 25rpx;
+  border-top-right-radius: 25rpx;
+  // &-before {
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 40rpx;
+  //   top: 20rpx;
+  //   left: 0;
+  //   z-index: -1;
+  //   background: #21B962;
+  // }
+}
+.list-title {
+  height: 118rpx;
+  @include flexRowCenter;
+  background: #fff;
+  &-text {
+    padding: 0 20rpx;
+    font-size: 34rpx;
+    font-weight: 500;
+    color: #060606;
+  }
+  .dot-right {
+    @include flexRowCenter;
+    &::before {
+      margin-right: 13rpx;
+      content: '';
+      width: 8rpx;
+      height: 8rpx;
+      border-radius: 8rpx;
+      background: #C2C2C2;
+    }
+    .dot-middle {
+      width: 7rpx;
+      height: 7rpx;
+      border-radius: 7rpx;
+      background: #C2C2C2;
+    }
+    &::after {
+      margin-left: 13rpx;
+      content: '';
+      width: 6rpx;
+      height: 6rpx;
+      border-radius: 6rpx;
+      background: #C2C2C2;
+    }
+    &.rotate {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.scroll-bottom {
+  width: 552rpx;
+  height: 100rpx;
+}

@@ -10,6 +10,11 @@ Page<any,any>({
         icon: 'order',
         path: '/pages/order/index'
       },
+      // {
+      //   label: '我的收藏',
+      //   icon: 'collection',
+      //   path: '/pages/my/collection/index'
+      // },
       {
         label: '地址管理',
         icon: 'location',
