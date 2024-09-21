@@ -4,7 +4,6 @@
     <text class="icon success"></text>
     <view class="info">
       <text class="info-status">支付成功</text>
-      <text class="info-extra">已获得x点能量</text>
     </view>
   </view>
   <view class="btn">
