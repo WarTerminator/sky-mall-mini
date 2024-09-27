@@ -48,7 +48,7 @@
         <text class="info-price-now">{{goodsInfo.price}}</text>
         <text wx:if="{{goodsInfo.oriPrice}}" class="info-price-original">¥{{goodsInfo.oriPrice}}</text>
       </view>
-      <text class="info-collection {{isCollection ? 'active' : ''}}" bindtap="handleCollection"></text>
+      <!-- <text class="info-collection {{isCollection ? 'active' : ''}}" bindtap="handleCollection"></text> -->
       <!-- <text class="info-price-sale">{{goodsInfo.soldNum}}+人付款</text> -->
     </view>
     <view class="info-title">
