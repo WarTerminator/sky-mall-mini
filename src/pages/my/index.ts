@@ -5,27 +5,38 @@ Page<any,any>({
   data: {
     IMG_PRE,
     entries: [
-      {
-        label: '我的订单',
-        icon: 'order',
-        path: '/pages/order/index'
-      },
-      // {
-      //   label: '我的收藏',
-      //   icon: 'collection',
-      //   path: '/pages/my/collection/index'
-      // },
-      {
-        label: '地址管理',
-        icon: 'location',
-        path: '/pages/address/index'
-      },
-      {
-        label: '关于',
-        icon: 'project',
-        path: '/pages/my/about/index'
-      },
+      [
+
+        {
+          label: '我的订单',
+          icon: 'order',
+          path: '/pages/order/index'
+        },
+        // {
+        //   label: '我的收藏',
+        //   icon: 'collection',
+        //   path: '/pages/my/collection/index'
+        // },
+        {
+          label: '地址管理',
+          icon: 'location',
+          path: '/pages/address/index'
+        },
+        {
+          label: '关于',
+          icon: 'project',
+          path: '/pages/my/about/index'
+        },
+      ],
+
+      [
+        {
+          label: '客服中心',
+          icon: 'service',
+        }
+      ]
     ],
+    
     userInfo: {},
     myInfo: {},
     avatarUrl: defaultAvatarUrl,
@@ -78,9 +89,14 @@ Page<any,any>({
     })
   },
   handleToPath(e:any) {
+   
     const {
       path,
+      icon
     } = e.currentTarget.dataset.item;
+    if (icon == 'service') {
+      return;
+    }
     wx.navigateTo({
       url: path,
     })

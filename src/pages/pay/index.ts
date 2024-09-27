@@ -130,8 +130,15 @@ Page<any,any>({
       });
     });
   },
+ 
   // 提交订单
   handleSubmit () {
+    if (!this.data.remark || this.data.remark.length !== 18) {
+      return wx.showToast({
+        title: '身份证号不正确',
+        icon: 'error',
+      })
+    }
     if (this.data.noAddress) return wx.showToast({
       title: '请添加地址'
     })
@@ -139,16 +146,16 @@ Page<any,any>({
       title: '支付中...'
     });
     const params = this.data.orderProduct?.prodType == ProdType.score ? {
-      remarks: '',
+      remarks: this.data.remark,
       uuid: this.data.uuid,
     } : {
       orderShopParam: [{
-        remarks: '',
+        remarks: this.data.remark,
         shopId: this.data.orderProduct.shopId,
       }],
       uuid: this.data.uuid,
       orderInvoiceList: null,
-      virtualRemarkList: []
+      virtualRemarkList: [],
     }
     return mallApi.submit(params, this.data.orderProduct?.prodType == ProdType.score).then((data: any) => {
       if (data.duplicateError == 1) {
@@ -205,6 +212,13 @@ Page<any,any>({
     }).finally(() => wx.hideLoading());
   },
   handleRemark (e: any) {
+    if (e.detail.value.length !== 18) {
+      wx.showToast({
+        title: '身份证号不正确',
+        icon: 'error',
+      })
+      return;
+    }
     this.setData({
       remark: e.detail.value,
     })

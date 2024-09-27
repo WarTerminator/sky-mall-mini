@@ -213,7 +213,7 @@ page {
   }
 }
 .pay-input {
-  padding-left: 20rpx;
+  padding-left: 6rpx;
   flex: 1;
 }
 .pay-power-text {
@@ -318,4 +318,35 @@ page {
   &-active {
     @include bgImg(30, 30, 'selected.png');
   }
+}
+
+.line {
+  background-color: #419CF1;
+  width: 6rpx;
+  height: 32rpx;
+}
+
+
+.tips {
+  color: #FF0000;
+}
+
+.lianxi-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.lianxi {
+  font-size: 26rpx;
+  color: #419CF1;
+
+  background-color: transparent;
+  margin: 0 !important;
+  padding-left: 20rpx !important;
+  padding-top: 30rpx !important;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

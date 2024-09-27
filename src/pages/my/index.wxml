@@ -17,7 +17,22 @@
     </view>
   </view>
   <view class="content">
-    <view class="entries">
+    <view wx:for="{{entries}}" wx:key="index" class="entries">
+      <view
+        wx:for="{{item}}"
+        wx:for-item="entry"
+        wx:key="icon"
+        class="entries-item"
+        data-item="{{entry}}"
+        bindtap="handleToPath"
+      >
+        <image class="entries-icon {{entry.icon}}" src="{{IMG_PRE + entry.icon}}.png" mode="widthFix" />
+        <button wx:if="{{entry.icon === 'service'}}" open-type="contact" class="service-label">{{entry.label}}</button>
+        <view wx:else class="entries-label">{{entry.label}}</view>
+
+      </view>
+    </view>
+    <!-- <view class="entries">
       <view
         wx:for="{{entries}}"
         wx:key="index"
@@ -28,7 +43,8 @@
         <image class="entries-icon" src="{{IMG_PRE + item.icon}}.png" mode="widthFix" />
         <view class="entries-label">{{item.label}}</view>
       </view>
-    </view>
+    </view> -->
+
   </view>
   <view class="tabBarBlock"></view>
 </view>

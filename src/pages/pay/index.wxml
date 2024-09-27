@@ -50,8 +50,12 @@
     <text class="custom-radio-active"></text>
   </view> -->
   <view class="pay-remark">
-    <text class="pay-label-text">备注</text>
-    <input class="pay-input" type='text' placeholder="若有特殊要求，请备注" value="{{remark}}" bindblur="handleRemark" />
+    <text class="line"></text>
+    <input class="pay-input" type='idcard' placeholder="输入身份证号" value="{{remark}}" bindblur="handleRemark" />
+    <text wx:if="{{!remark}}" class="tips">*</text>
+  </view>
+  <view  class="lianxi-wrap">
+    <button open-type="contact" class="lianxi">咨询平台客服 ></button>
   </view>
   <view class="pay-total">
     <view class="pay-total-title">合计</view>

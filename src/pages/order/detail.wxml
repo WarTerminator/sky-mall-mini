@@ -39,7 +39,7 @@
         <view class="item-content">{{orderInfo.createTime}}</view>
       </view>
       <view class="info-form-item">
-        <view class="item-label">备注信息</view>
+        <view class="item-label">身份证号</view>
         <view class="item-content">{{orderInfo.remarks || ''}}</view>
       </view>
       <view class="info-form-item">
@@ -53,6 +53,9 @@
         <view class="item-label">支付方式</view>
         <view class="item-content">微信</view>
       </view>
+    </view>
+    <view  class="lianxi-wrap">
+      <button open-type="contact" class="lianxi">咨询平台客服 ></button>
     </view>
     <view class="pay-total">
       <view class="pay-total-title">合计</view>
