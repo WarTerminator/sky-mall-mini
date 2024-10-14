@@ -12,8 +12,8 @@ export enum Host {
 };
 const hostMap = {
   [Env.DEV]: {
-    // [Host.API]: 'https://sky-api-test.war6sky.com',
-    [Host.API]: 'https://sky-mallapi.war6sky.com',
+    [Host.API]: 'https://sky-api-test.war6sky.com',
+    // [Host.API]: 'https://sky-mallapi.war6sky.com',
   },
   [Env.ONLINE]: {
     [Host.API]: 'https://sky-mallapi.war6sky.com',

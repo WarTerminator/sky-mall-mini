@@ -29,6 +29,7 @@ const formatRichText = (html: any) => {
   return newContent;
 }
 
+let interval = 1000;
 Page<any, any>({
   data: {
     isShared: false, // 是否分享场景
@@ -38,6 +39,7 @@ Page<any, any>({
     userInfo: {},
     vipOption: {},
     currentCount: 1,
+    timeLeft: 0,
     currentSkuItem: {
       skuId: 0,
       stocks: 0,
@@ -71,6 +73,12 @@ Page<any, any>({
     params: {},
     navBar: {},
     actionHeight: 65,
+    d: 0, //天
+		h: 0, //时
+		m: 0, //分
+		s: 0, //秒
+		lastTime: '', //倒计时的时间戳
+		isCountOver: false, // 倒计时是否完成
   },
   onLoad(params: any) {
     const app = getApp();
@@ -88,6 +96,18 @@ Page<any, any>({
         actionHeight: res.height
       });
     });
+
+    this.queryDetail(params);
+    
+    // 收藏
+    params.prodId && userApi.isCollectionGoods(+params.prodId).then((result: boolean) => {
+      this.setData({
+        isCollection: result,
+      });
+    });
+  },
+
+  queryDetail (params: any) {
     // 商品详情
     mallApi.goodsInfo(+(params?.prodId || 0)).then((data => {
       const skuIms = data?.skuList.filter((i: any, index: number) => {
@@ -103,14 +123,83 @@ Page<any, any>({
         currentSkuItem: data.skuList?.[0],
         content: formatRichText(data?.content)
       });
+
+      if (data?.limitedStatus === 1 && this.initTime(data) > 0) {
+        this.startCountdown(data);
+      }
     }));
-    // 收藏
-    params.prodId && userApi.isCollectionGoods(+params.prodId).then((result: boolean) => {
-      this.setData({
-        isCollection: result,
-      });
+  },
+
+  //初始化时间
+  initTime(data: any) {
+    let lastTime = Number(new Date(data.rushTime)) - Number(new Date(data.currentTime));
+    return Math.max(lastTime, 0);
+  },
+
+  // 格式化时间加0
+  fixedZero(val: number) {
+    return val < 10 ? `0${val}` : val;
+  },
+
+  //默认处理时间格式
+  defaultFormat(time: number) {
+    const days = 60 * 60 * 1000 * 24;
+    const hours = 60 * 60 * 1000;
+    const minutes = 60 * 1000;
+    const d = Math.floor(time / days);
+    const h = Math.floor((time % days) / hours);
+
+    const m = Math.floor((time % hours) / minutes);
+    const s = Math.floor((time % minutes) / 1000);
+
+    this.setData({
+      d: this.fixedZero(d),
+      h: this.fixedZero(h),
+      m: this.fixedZero(m),
+      s: this.fixedZero(s),
     });
   },
+
+  //定时事件
+  tick() {
+    let { lastTime } = this.data;
+    this.timer = setTimeout(() => {
+      clearTimeout(this.timer);
+      if (lastTime <= interval) {
+        this.setData({
+          lastTime: 0,
+          isCountOver: false,
+        }, () => {
+          this.queryDetail();
+        });
+      } else {
+        lastTime -= 1000;
+        this.setData(
+          {
+            lastTime,
+          },
+          () => {
+            this.defaultFormat(lastTime);
+            this.tick();
+          },
+        );
+      }
+    }, interval);
+  },
+
+  startCountdown(data: any) {
+    const lastTime = this.initTime(data);
+    if (lastTime > interval) {
+      this.defaultFormat(lastTime);
+      this.setData({
+        isCountOver: true,
+        lastTime,
+      });
+    }
+
+    this.tick();
+  },
+
   onUnload () {
     const app = getApp();
     app.globalData.scene = '';
@@ -262,6 +351,9 @@ Page<any, any>({
   },
   // 数量加一
   handleAdd () {
+    // 限购的逻辑
+    const { hasMaxNum, maxNum } = this.data.goodsInfo || {};
+    if (hasMaxNum && this.data.currentCount >= maxNum) return;
     if (!this.data.currentSkuItem?.skuId) {
       return wx.showToast({
         title: '请选择规格',

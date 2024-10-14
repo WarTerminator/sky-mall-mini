@@ -101,11 +101,14 @@
       </view>
     </view>
     <view class="sku-count">
-      <view class="sku-select-title">购买数量</view>
+      <view class="sku-select-title">
+        <text>购买数量</text>
+        <text class='max-num' wx:if="{{goodsInfo.hasMaxNum}}">（限购：{{goodsInfo.maxNum}}件）</text>
+      </view>
       <view class="sku-count-box">
         <view class="sku-count-sub" bindtap="handleSub">-</view>
         <view class="sku-count-number">{{currentCount}}</view>
-        <view class="sku-count-add" bindtap="handleAdd">+</view>
+        <view class="sku-count-add {{goodsInfo.hasMaxNum && currentCount >= goodsInfo.maxNum && 'sku-count-disable'}}" bindtap="handleAdd">+</view>
       </view>
     </view>
   </view>
@@ -115,9 +118,16 @@
   <button wx:if="{{!showSkuPop}}" open-type="share" class="product-share">
     <view class="product-share-icon"></view>
   </button>
-  <view wx:if="{{!showSkuPop}}" class="product-action-btn" bindtap="handleBuy">立即购买</view>
-  <view wx:else class="product-action-ensure" bindtap="handleEnsure">
-    确认
+  <view wx:if="{{isCountOver}}" class="product-action-btn disable">
+    距离开抢还有
+    <text wx:if="{{ d != '00' }}"> {{ d }}天</text>
+		{{ h }}:{{ m }}:{{ s }}
+  </view>
+  <view wx:else class="product-action-btn-wrap">
+    <view wx:if="{{!showSkuPop}}" class="product-action-btn" bindtap="handleBuy">立即购买</view>
+    <view wx:else class="product-action-ensure" bindtap="handleEnsure">
+      确认
+    </view>
   </view>
 </view>
 <view wx:if="{{previewShow}}" class="product-pic-preview" bindtap="handlePreviewClose">

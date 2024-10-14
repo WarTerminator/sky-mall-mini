@@ -10,6 +10,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/product/index",
+          "pathName": "pages/product/index",
+          "query": "prodId=476",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/product/index",
+          "pathName": "pages/product/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/pay/result",
           "pathName": "pages/pay/result",
           "query": "",
