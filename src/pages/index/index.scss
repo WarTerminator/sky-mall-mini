@@ -108,7 +108,6 @@ page {
 
 .scroll-area {
   min-height: 100vh;
-  padding-bottom: 90px;
   box-sizing: border-box;
 }
 
@@ -227,4 +226,8 @@ page {
   width: 60rpx;
   height: 2rpx;
   border-radius: 2rpx;
+}
+
+.tabBarBlock {
+  height: 80rpx;
 }

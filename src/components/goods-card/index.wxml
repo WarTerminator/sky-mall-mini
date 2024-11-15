@@ -1,5 +1,11 @@
 <view class="goods" bindtap="handleDetail">
-  <image mode="widthFix" class="goods-icon" fade-in src="{{item.pic}}" />
+  <view class="imgWrap">
+    <image mode="widthFix" class="goods-icon" fade-in src="{{item.pic}}" />
+     <view class="mask" wx:if="{{!item.totalStocks}}">
+      <image class="items" fade-in src="https://img.war6sky.com/2024/11/37ecf7f8b2b244f1baf368247bd259f6.jpg" />
+    </view>
+  </view>
+
   <span class="goods-title">
     <text wx:if="{{type == 'group' && item.activityStatus}}" class="goods-title-tag">{{utils.getOrderStatusText(item.activityStatus)}}</text>
     {{item.prodName || item.activityName}}
@@ -15,6 +21,7 @@
       <view class="goods-group-right">成团金额 ¥{{item.targetAmount}}</view>
     </view>
   </view>
+ 
 </view>
 
 <wxs module="utils">

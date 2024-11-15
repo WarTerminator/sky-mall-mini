@@ -21,6 +21,8 @@
       class="product-pic-section-swiper"
       autoplay="{{true}}"
       bindchange="handleSwiperChange"
+      interval="2000"
+      circular="{{true}}"
     >
       <swiper-item wx:if="{{goodsInfo.video}}">
         <view class="swiper-item">

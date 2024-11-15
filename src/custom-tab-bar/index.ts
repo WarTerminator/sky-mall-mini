@@ -45,7 +45,16 @@ Component({
     switchTab(e: any) {
       const data = e.currentTarget.dataset;
       const url = data.path;
-      if (!url) return;
+      if (!url) {
+        wx.navigateToMiniProgram({
+          appId: 'wxb9f138db05ecfc4c',
+          path: 'pages/index/index', // 目标页面的路径
+          success() {
+            // 成功跳转后的回调
+          }
+        })
+        return;
+      };
       app.globalData.selected = data.index;
       wx.switchTab({url})
     }

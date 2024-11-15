@@ -88,7 +88,7 @@ Page<any, any>({
       userInfo,
       params,
       prodId: params.prodId,
-      isShared: app.globalData?.scene == 1007 || app.globalData?.scene == 1008,
+      isShared: params?.from === 'share',
       vipOption: userInfo?.levelType == 1 ? VIPConfigMap[userInfo?.userLevel.termType || 0] : {},
     });
     getMyElement('#J_Action').then(res => {
@@ -211,7 +211,18 @@ Page<any, any>({
     } = this.data.goodsInfo as any;
     return {
       title: prodName,
-      path: `/pages/product/index?prodId=${this.data.prodId}`,
+      path: `/pages/product/index?prodId=${this.data.prodId}&from=share`,
+      imageUrl: pic,
+    }
+  },
+  onShareTimeline: function () {
+    const {
+      prodName,
+      pic,
+    } = this.data.goodsInfo as any;
+    return {
+      title: prodName,
+      path: `/pages/product/index?prodId=${this.data.prodId}&from=share`,
       imageUrl: pic,
     }
   },

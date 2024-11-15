@@ -21,6 +21,8 @@
       indicator-color="rgba(65, 156, 241, .6)"
       indicator-active-color="#419CF1"
       class="banners-swiper"
+      interval="2000"
+      circular="{{true}}"
     >
       <swiper-item
         class="banners-swiper-item"
@@ -71,5 +73,5 @@
       <goods-card item="{{item}}"></goods-card>
     </block>
   </grid-view>
-  <!-- <view class="{{!goods.length && !init ? 'empty' : 'tabBarBlock'}}"></view> -->
+  <view class="tabBarBlock"></view>
 </scroll-view>
