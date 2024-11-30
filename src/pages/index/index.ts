@@ -54,6 +54,28 @@ Page<any, any>({
     scrollTop: null,
     categoryWrapTop: '',
     fixTab: false,
+    categoriesId: '',
+  },
+
+  handleScrollToTop () {
+    this.setData({
+      navBarOpacity: 0
+    });
+  },
+  // 滚动导航渐现
+  handleScroll (evt: any) {
+    const maxDistance = 60
+    const scrollTop = clamp(evt.detail.scrollTop, 0, maxDistance)
+    const progress = scrollTop / maxDistance;
+    if (evt.detail.scrollTop < 30) {
+      this.setData({
+        navBarOpacity: 0
+      });
+    } else {
+      this.setData({
+        navBarOpacity: lerp(0, 1, progress)
+      });
+    }
   },
   onShareAppMessage: function () {
     return {
@@ -90,11 +112,12 @@ Page<any, any>({
       app.globalData.categoryCurrent = data.categories?.[0]?.id;
       this.setData({
         banners: data.banners || [],
+        categoriesId: data.categories?.[0]?.id,
         hots: (data.hots || []).slice(0, 5) || [],
         entrances: data.entrances || [],
         categorySet: [{
           page: 0,
-          categorys: data.categories.slice(0, 5) || []
+          categorys: data.categories || []
         }]
       });
 
@@ -108,17 +131,32 @@ Page<any, any>({
       }
     });
   },
+
+  handleCategory(e: any) {
+    let id = e?.currentTarget?.dataset.item?.id;
+    this.setData({
+      categoriesId: id,
+      pageIndex: 1,
+    })
+    this.getFeeds();
+  },
   
-  getFeeds() {
+  getFeeds(type = '') {
     return mallApi.goodsFeedsScore({
       sort: 1,
-      categoryId: app.globalData.categoryCurrent || '',
+      categoryId: this.data.categoriesId,
       current: this.data.pageIndex,
       size: 20,
     }).then((result) => {
       const isEnd = result.pages == this.data.pageIndex;
+      let _list: any = []
+      if (type === 'add') {
+        _list = [...this.data.goods, ...(result?.records[0].products || [])]
+      } else {
+        _list = result?.records[0].products || []
+      }
       this.setData({
-        goods: [...this.data.goods, ...(result?.records[0].products || [])],
+        goods: _list,
         pageIndex: this.data.pageIndex + 1,
         isEnd,
         init: false,
@@ -135,7 +173,7 @@ Page<any, any>({
   // 滚动加载
   handleScrollEnd() {
     if (this.data.isEnd) return false;
-    return this.getFeeds();
+    return this.getFeeds('add');
   },
   // 滚动导航渐现
   handleScrollUpdate(evt: any) {

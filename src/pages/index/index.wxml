@@ -1,4 +1,4 @@
-<navigation-bar class="nav-bar" title="" back="{{false}}" background="rgba(255,255,255,{{navBarOpacity}})">
+<navigation-bar class="nav-bar" title="" back="{{false}}" height="{{navBarOpacity ? 'auto' : '0px'}}" background="rgba(255,255,255,{{navBarOpacity}})">
   <view class="nav-left" slot="center">
     <view class="nav-title" style='opacity: {{navBarOpacity}}'>
       MoN小卡世家
@@ -8,11 +8,16 @@
 <scroll-view
   class="scroll-area"
   type="custom"
+  enhanced="{{true}}"
+  upper-threshold="{{0}}"
+  lower-threshold="{{400}}"
   scroll-y
   show-scrollbar="{{false}}"
-  bindscroll="handleScrollUpdate"
+  bindscrolltoupper="handleScrollToTop"
+  bindscroll="handleScroll"
   bindscrolltolower="handleScrollEnd"
-  style="height:{{ navBar.scrollViewHeight }}px"
+  scroll-into-view="{{intoViewY}}"
+  using-sticky
 >
   <view class="banners">
     <swiper
@@ -37,16 +42,17 @@
   </view>
 
     <!-- 类目 -->
-  <!-- <view
+  <view
     class="category-wrp-content {{fixTab && 'fix-tab'}}"
     id="categoryWrap"
-    style="top: {{navBar.navBarHeight}}px">
+    style="top: {{navBar.navBarHeight - 1}}px">
     <swiper class="category-wrp">
       <block wx:for="{{categorySet}}" wx:key="page">
         <swiper-item>
           <view class="category-list">
             <block wx:for="{{item.categorys}}" wx:key="id" wx:for-item="category">
-              <view class="category-item {{categoryCurrent === category.id && 'active'}}" data-item="{{category}}" bindtap="handleCategory">
+              <view class="category-item {{categoriesId === category.id && 'active'}}" data-item="{{category}}" bindtap="handleCategory">
+                <image src="{{category.img}}" class="img-icon" />
                 <view class="category-name">
                   <text>{{category.name}}</text>
                 </view>
@@ -56,7 +62,7 @@
         </swiper-item>
       </block>
     </swiper>
-  </view> -->
+  </view>
   <!-- feeds流 -->
   <view wx:if="{{!goods.length}}" class="empty-wrap">
     <image src="https://img.war6sky.com/2024/09/ea102f999a944f989f5c7035e11544b9.png" />
